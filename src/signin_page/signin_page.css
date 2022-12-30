@@ -1,3 +1,4 @@
+
 #float-label {
     display: flex;
     flex-direction: column;
@@ -44,59 +45,53 @@
     grid-template-columns: 25% 25%;
   }
   
-  .section1_title {
-    top: 110px;
-    margin-left: 152px;
-    width: 411px;
-    height: 170px;
+  
+  /* .section-1{
+    justify-content: center;
+    align-items: center;
+ 
+  } */
+  .section-1-content{
+    margin-left: 30%;
+    margin-top: 10%;
+    width: 100%;
+  }
+  .section1_title{
     text-align: left;
-    font: normal normal 700 100px/120px Avenir;
+    font: normal normal 900 100px/120px Avenir;
     letter-spacing: 0px;
-    color: #5861ae;
+    color: #5861AE;
     text-transform: capitalize;
     opacity: 1;
-    font-size: 60px;
   }
-  
-  .section1_para {
-    top: 501px;
-    margin-left: 151px;
-    width: 335px;
-    height: 27px;
+  .section1_para{
     text-align: left;
     font: normal normal normal 20px/26px Avenir;
     letter-spacing: 0.8px;
     color: #565657;
     text-transform: capitalize;
     opacity: 1;
-    font-size: 14px;
   }
-  
-  .section1_para1 {
-    top: 602px;
-    margin-left: 152px;
-    width: 189px;
-    height: 22px;
+  .section1_para1{
     text-align: left;
+    margin-top: 20px;
     font: normal normal normal 16px/26px Avenir;
     letter-spacing: 0.64px;
     color: #565657;
     text-transform: capitalize;
     opacity: 1;
-    font-size: 13px;
   }
-  
-  .section1_btn {
-    top: 640px;
-    margin-left: 152px;
+  .section1-btn {
+   justify-items: left;
     width: 150px;
     height: 50px;
     border: 2px solid #4552c1;
     border-radius: 4px;
     opacity: 1;
+    padding: 10px;
   }
   
-  .section1_btn:hover {
+  .section1-btn:hover {
     background-color: #4552c1;
     color: white;
     box-shadow: 2px 2px 10px gray;

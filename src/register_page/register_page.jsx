@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./register_page.css";
+import Footer1 from "../Footer/footer1";
+import SigninHeader from "../Header/sign_in_header";
+import Footer2 from "../Footer/footer2";
+import Footer3 from "../Footer/footer3";
 const RegisterPage = () => {
-//const navigate = useNavigate();
+const navigate = useNavigate();
   const [nameErrorMsg, setNameErrorMsg] = useState("");
   const [emailErrorMsg, setEmailErrorMsg] = useState("");
   const [phoneErrorMsg, setPhoneErrorMsg] = useState("");
@@ -120,7 +124,7 @@ const RegisterPage = () => {
       setPinErrorMsg("");
     }
   };
-
+//! Handle register 
   const submitHandler = (e) => {
     e.preventDefault();
     const {
@@ -133,47 +137,50 @@ const RegisterPage = () => {
       pincode,
       Password,
     } = userData;
-
-    // fetch(`${URL}/api/v1/user/register`, {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     name: Name,
-    //     email: Email,
-    //     phone: PhoneNumber,
-    //     state: State,
-    //     district: District,
-    //     address: Address,
-    //     pincode: pincode,
-    //     password: Password,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-      //.then((res) => res.json())
-      //.then((data) => {
-      //   console.log(data);
-      //   if (data.message === "Account already exists") {
-      //     setModal(!modal);
-      //     alert("User Already Exists.Please, Login !!!");
-      //     //navigate("/", { replace: true });
-      //   } else {
-      //     alert("Registration Successful");
-      //   }
-      // })
-  //     .catch((e) => {
-  //       alert(e.message);
-  //     });
+    console.log(userData)
+    fetch(`/register`, {
+      method: "POST",
+      body: JSON.stringify({
+        name:Name,
+        email:Email,
+        password:Password,
+        phone:PhoneNumber,
+        state:State,
+        district:District,
+        pincode:pincode,
+        main_Address:Address
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.message === "Account already exists") {
+          setModal(!modal);
+          alert("User Already Exists.Please, Login !!!");
+          navigate("/login", { replace: true });
+        } else {
+          alert("Registration Successful");
+        }
+      })
+      .catch((e) => {
+        alert(e.message);
+      });
    };
 
   return (
+    <>
+    <SigninHeader></SigninHeader>
     <div className="container1">
+      
       <section className="register_text">
         <h1 className="register_title">Laundry Service</h1>
         <h4 className="register_para">Doorstep Wash & Dryclean Service</h4>
         <p className="section1_para11">Don't Have An Account?</p>
 
-        <button  className="section1_btn1">
+        <button  className="section1_btn1" onClick={()=>{navigate('/login')}}>
           Sign In
         </button>
       </section>
@@ -265,12 +272,16 @@ const RegisterPage = () => {
             I agree to Terms & Condition receiving marketing and promotional
             materials
           </label>
-          <button className="section2_btn1">
+          <button type="submit" className="section2_btn1">
             Register
           </button>
         </form>
       </section>
     </div>
+    <Footer1></Footer1>
+    <Footer2></Footer2>
+    <Footer3></Footer3>
+    </>
   );
 };
 

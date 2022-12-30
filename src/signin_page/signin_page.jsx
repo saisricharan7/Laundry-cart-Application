@@ -1,11 +1,14 @@
-import React, { useState } from "react";
-import "./signup_page.css";
-//import { useNavigate } from "react-router-dom";
-//import { getToken, setToken } from "../../authOperations";
+import React, { useState,useContext } from "react";
+import "./signin_page.css";
+import { useNavigate } from "react-router-dom";
+import Footer1 from "../Footer/footer1";
+import SigninHeader from "../Header/sign_in_header";
+import Footer2 from "../Footer/footer2";
+import Footer3 from "../Footer/footer3";
 const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
-const SignupPage = () => {
-  //const navigate = useNavigate();
+const SigninPage = () => {
+  const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
   const [message, setMessage] = useState("");
@@ -41,50 +44,50 @@ const SignupPage = () => {
       setPassErrorMsg("");
     }
   };
-
-  const submitHandler = (e) => {
+// handle signin and routing to home page
+  const submitHandler =async (e) => {
     e.preventDefault();
     const { email, password } = data;
-    // fetch(`${URL}/api/v1/user/login`, {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     email: email,
-    //     password: password,
-    //   }),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     console.log(data);
-    //     if (data.status === "Failed") {
-    //       setMessage(data.message);
-    //     } else {
-    //       const token = data.token;
-    //       setToken("token", token);
-    //       if (token === getToken("token")) {
-    //         console.log(token);
-    //         console.log(data.name);
-    //         setToken("Username", data.name);
-    //         navigate("/home");
-    //       }
-    //     }
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //     setMessage("Server down. try after sometime !!");
-    //   });
+    await fetch(`/login`, {
+      method: "POST",
+      body: JSON.stringify({
+        email: email,
+        password: password,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.status === "Failed") {
+          setMessage(data.message);
+        } else {
+          const token = data.token;
+
+          localStorage.setItem('token',token)
+          navigate("/home");
+        }
+      })
+      .catch((e) => {
+        console.log(e);
+        setMessage("Server down. try after sometime !!");
+      });
   };
   return (
+    <>
+    <SigninHeader></SigninHeader>
     <div className="container">
       <section className="section-1">
+        <section className="section-1-content">
         <h1 className="section1_title">Laundry Service</h1>
         <h4 className="section1_para">Doorstep Wash & Dryclean Service</h4>
         <p className="section1_para1">Don't Have An Account?</p>
-        <button  className="section1_btn">
-          Resigter
-        </button>
+        <div  className="section1-btn" onClick={()=>{navigate("/")}}>
+          Register
+        </div>
+        </section>
       </section>
       <section className="section-2">
         <h1 className="section2_title">SIGN IN</h1>
@@ -111,14 +114,18 @@ const SignupPage = () => {
           </div>
           <p className="section2_error_message">{passErrorMsg}</p>
           <p className="section2_forget">forget password ?</p>
-          <p className="invalid">{message}</p>
-          <button className="section2_btn" >
+          <p className="section2_error_message">{message}</p>
+          <button className="section2_btn" type="submit">
             Sign In
           </button>
         </form>
       </section>
     </div>
+    <Footer1></Footer1>
+    <Footer2></Footer2>
+    <Footer3></Footer3>
+    </>
   );
 };
 
-export default SignupPage;
+export default SigninPage;

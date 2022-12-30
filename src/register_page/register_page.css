@@ -1,3 +1,4 @@
+
 .float-label1 {
     display: grid;
     grid-auto-flow: row;
@@ -50,7 +51,7 @@
   
   .container1 {
     display: grid;
-    grid-template-columns: 10% 80%;
+    grid-template-columns: 20vw 80vw;
   }
   
   .register_text {
