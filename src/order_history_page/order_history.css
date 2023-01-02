@@ -1,0 +1,119 @@
+.footer-history{
+        position: absolute;
+        bottom: 0;
+        background: #182838;
+        width: 100%;
+        color: white;
+        height: 50px;
+        text-align: center;
+        padding-top: 15px;
+
+}
+.history-body{
+    display:flex;
+  }
+  .history-sidebar{
+    display: inline;
+    width: 57px;
+    background: #5861AE 0% 0% no-repeat padding-box;
+    opacity: 1;
+    height:85vh;
+  }
+.history-sidebar div{
+  padding:15px 8px;
+  height: 50px;
+  display: block;
+}
+  .history-sidebar img{
+    
+    width: 22px;
+    height: 22px;
+    background: transparent  0% 0% no-repeat padding-box;
+    opacity: 1; 
+  }
+  .history-table-div{
+    width:100%;
+    height:100%;
+    margin:0% 3% ;
+  }
+  table{
+    border-collapse: collapse;
+    width:100%;
+   
+}
+.history-thead{
+    background-color: #2F2F2F;
+    color:#FFFFFF;
+    text-align: center;
+    border-radius: 2px;
+    opacity: 1;
+    height:50px;
+}
+tr{
+    text-align: center;
+}
+.cancel-order{
+    color: #EB1717;
+}
+.cancel-order:hover{
+    cursor: pointer;
+}
+/* -----modal css---- */
+.modal, .overlay{
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index: 1;
+    position: fixed;
+}
+.modal-content {
+  /* position: absolute; */
+  float:right;
+  line-height: 1.4;
+  background: #f1f1f1;
+  border-radius: 3px;
+  width:60vw;
+  height:100vh;    
+}
+.modal-header{
+  width:100%;
+  height:70px;
+  color: #FFFFFF;
+  font-size: 25px;
+  text-align: left;
+  padding:10px 10px;
+  background: #5861AE 0% 0% no-repeat padding-box;
+}
+.modal-body{
+  border:1px solid #E2E2E2;
+  /* height :100%; */
+  padding:10px 10px;
+  text-align: left;
+}
+
+.overlay{
+    background: rgba(49,49,49,0.4);
+}
+.popup-content{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    line-height: 1.4;
+    background: #f1f1f1;
+    padding: 14px 28px;
+    border-radius: 3px;
+    max-width: 600px;
+    min-width: 300px;
+}
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 7px;
+  color:#FFFFFF;
+}
+

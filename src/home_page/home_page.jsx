@@ -25,6 +25,8 @@ import moment from "moment";
 import blueTick from './images/Blue_tick.PNG'
 
 const Home_page=()=>{
+    const current= new Date();
+    const up_date=`${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}`
     const navigate = useNavigate();
     const [modal, setModal] = useState(false);
     const [popup,setPop]= useState(false);
@@ -369,6 +371,10 @@ const Home_page=()=>{
           alert(e.message);
         });
     }
+    function Handle_go_to_orders(){
+        setPop(false);
+        navigate("/history");
+    }
 
     console.log(finalData.items)
 
@@ -614,7 +620,7 @@ const Home_page=()=>{
                             <img src={blueTick}/>
                             <h1>Your order is successfully.</h1>
                             <p>You can track the delivery in the "Orders" section.</p>
-                            <button  onClick={()=>{setPop(false)}}>Go to orders</button>
+                            <button  onClick={Handle_go_to_orders}>Go to orders</button>
                             </div>
                         </div>
                         </div>)}

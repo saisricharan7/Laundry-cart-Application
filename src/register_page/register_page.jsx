@@ -125,7 +125,7 @@ const navigate = useNavigate();
     }
   };
 //! Handle register 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     const {
       Name,
@@ -138,7 +138,7 @@ const navigate = useNavigate();
       Password,
     } = userData;
     console.log(userData)
-    fetch(`/register`, {
+    await fetch(`/register`, {
       method: "POST",
       body: JSON.stringify({
         name:Name,
@@ -163,6 +163,7 @@ const navigate = useNavigate();
           navigate("/login", { replace: true });
         } else {
           alert("Registration Successful");
+          navigate("/login", { replace: true });
         }
       })
       .catch((e) => {
@@ -272,7 +273,7 @@ const navigate = useNavigate();
             I agree to Terms & Condition receiving marketing and promotional
             materials
           </label>
-          <button type="submit" className="section2_btn1">
+          <button type="submit" className="section2_btn1" >
             Register
           </button>
         </form>
