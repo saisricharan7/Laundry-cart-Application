@@ -1,8 +1,7 @@
 const mongoose = require("mongoose");
 const orderSchema = new mongoose.Schema({
     user:{
-        type:mongoose.Types.ObjectId,
-        ref:"Users"
+        type:String
     },
     order_id:{type:String},
     date_time:{type:String},
@@ -17,36 +16,43 @@ const orderSchema = new mongoose.Schema({
             qty:Number,
             methods:String,
             denomination:String,
+            item_price:Number
         },
         Tshirts:{
             qty:Number,
             methods:String,
             denomination:String,
+            item_price:Number
         },
         Trousers:{
             qty:Number,
             methods:String,
             denomination:String,
+            item_price:Number
         },
         Jeans:{
             qty:Number,
             methods:String,
             denomination:String,
+            item_price:Number
         },
         Boxers:{
             qty:Number,
             methods:String,
             denomination:String,
+            item_price:Number
         },
         Joggers:{
             qty:Number,
             methods:String,
             denomination:String,
+            item_price:Number
         },
         Others:{
             qty:Number,
             methods:String,
             denomination:String,
+            item_price:Number
         }
     }
 
