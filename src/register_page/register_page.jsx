@@ -125,7 +125,7 @@ const navigate = useNavigate();
     }
   };
 //! Handle register 
-  const submitHandler = (e) => {
+  const submitHandler =async (e) => {
     e.preventDefault();
     const {
       Name,
@@ -138,7 +138,7 @@ const navigate = useNavigate();
       Password,
     } = userData;
     console.log(userData)
-    fetch(`/register`, {
+    await fetch(`/register`, {
       method: "POST",
       body: JSON.stringify({
         name:Name,

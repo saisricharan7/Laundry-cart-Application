@@ -13,39 +13,12 @@ const History=()=>{
     const token =  localStorage.getItem("token");
     const [cancel_popup,setCancel]= useState(false);
     const [historymodal, setHistoryModal] = useState(false);
-    const [shirt, setShirt] = useState({qty:0,
-                                    methods:"",
-                                    denomination:"",
-                                    item_price:0});
-    const [jeans, setJeans] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [trousers, setTrousers] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [t_shirt, setT_shirt] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [boxers, setBoxers] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [others, setOthers] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [joggers,setJoggers]= useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
+  
     const [sub_total,setSub_total]=useState(0)
     const [id,setItemid]= useState('');
     const user =JSON.parse(window.localStorage.getItem("userData")) 
     let data,post;
-    let products=[];
+    const [products,setProducts]= useState()
     let headers = { "Authorization": token };
   
     const HandleCancelOrder=async ()=>{
@@ -58,28 +31,14 @@ const History=()=>{
     }
     const Historyclose=()=>{
         setHistoryModal(false);
-        setBoxers(null);
-        setJeans(null);
-        setJoggers(null);
-        setShirt(null);
-        setOthers(null);
-        setT_shirt(null);
-        setTrousers(null);
+
         // setSub_total(0);
     }
     
     const Cancel_order_btn=()=>{
         setHistoryModal(false);
         setCancel(true);
-        setHistoryModal(false);
-        setBoxers(null);
-        setJeans(null);
-        setJoggers(null);
-        setShirt(null);
-        setOthers(null);
-        setT_shirt(null);
-        setTrousers(null);
-        // setSub_total(0);
+
     }
     const HandleHistorySummary=async (key)=>{
         setHistoryModal(true)
@@ -90,43 +49,11 @@ const History=()=>{
                 req_item=eachItem
                 console.log(req_item)
                 setSub_total(req_item.price)
-                products=req_item.items
+             
+                setProducts(req_item.items)
             }
         }
-        console.log(products.shirts.qty)
-        //  for(let each in products){
-        //         if(each==="shirts"){
-        //             setShirt(...shirt,products.each)
-        //             console.log(products.each)
-        //             console.log(shirt)
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //             // console.log(sub_total)
-        //         }
-        //         else if(each==="Jeans"){
-        //             setJeans(...jeans,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else if(each==="Trousers"){
-        //             setTrousers(...trousers,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else if(each==="Boxers"){
-        //             setBoxers(...boxers,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else if(each=="Tshirts"){
-        //             setT_shirt(...t_shirt,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else if(each==="Joggers"){
-        //             setJoggers(...joggers,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else{
-        //             setOthers(...others,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //     }
+  
     }
 
     useEffect(async ()=>{
@@ -198,12 +125,12 @@ const History=()=>{
                             <div className="modal-body">
                                 <p style={{"color":"#3B3737"}}>orders</p>
                                {products.shirts.qty>0?<div><span>Shirts</span><span>{products.shirts.methods}</span><span>{products.shirts.denomination} =</span><span>{products.shirts.item_price}</span></div>:<></>}
-                               {/* {products.jeans.qty!=0?<div className="each-item"><span>Jeans</span><span>{jeans.methods}</span><span>{jeans.denomination} =</span><span>{jeans.item_price}</span></div>:<></>}
-                               {products.trousers.qty!=0?<div className="each-item"><span>Trousers</span><span>{trousers.methods}</span><span>{trousers.denomination} =</span><span>{trousers.item_price}</span></div>:<></>}
-                               {products.t_shirt.qty!=0?<div className="each-item"><span>Tshirts</span><span>{t_shirt.methods}</span><span>{t_shirt.denomination} =</span><span>{t_shirt.item_price}</span></div>:<></>}
-                               {products.joggers.qty!=0?<div className="each-item"><span>Joggers</span><span>{joggers.methods}</span><span>{joggers.denomination} =</span><span>{joggers.item_price}</span></div>:<></>}
-                               {products.boxers.qty!=0?<div className="each-item"><span>Boxers</span><span>{boxers.methods}</span><span>{boxers.denomination} =</span><span>{boxers.item_price}</span></div>:<></>}
-                               {products.others.qty!=0?<div className="each-item"><span>Others</span><span>{others.methods}</span><span>{others.denomination} =</span><span>{others.item_price}</span></div>:<></>} */}
+                               {products.Jeans.qty!=0?<div className="each-item"><span>Jeans</span><span>{products.Jeans.methods}</span><span>{products.Jeans.denomination} =</span><span>{products.Jeans.item_price}</span></div>:<></>}
+                               {products.Trousers.qty!=0?<div className="each-item"><span>Trousers</span><span>{products.Trousers.methods}</span><span>{products.Trousers.denomination} =</span><span>{products.Trousers.item_price}</span></div>:<></>}
+                               {products.Tshirts.qty!=0?<div className="each-item"><span>Tshirts</span><span>{products.Tshirts.methods}</span><span>{products.Tshirts.denomination} =</span><span>{products.Tshirts.item_price}</span></div>:<></>}
+                               {products.Joggers.qty!=0?<div className="each-item"><span>Joggers</span><span>{products.Joggers.methods}</span><span>{products.Joggers.denomination} =</span><span>{products.Joggers.item_price}</span></div>:<></>}
+                               {products.Boxers.qty!=0?<div className="each-item"><span>Boxers</span><span>{products.Boxers.methods}</span><span>{products.Boxers.denomination} =</span><span>{products.Boxers.item_price}</span></div>:<></>}
+                               {products.Others.qty!=0?<div className="each-item"><span>Others</span><span>{products.Others.methods}</span><span>{products.Others.denomination} =</span><span>{products.Others.item_price}</span></div>:<></>}
                                <div>Sub Total :{sub_total}</div>
                                <div>Pick up charges : 90</div>
                                <div>Total : {parseInt(sub_total)+90}</div>
