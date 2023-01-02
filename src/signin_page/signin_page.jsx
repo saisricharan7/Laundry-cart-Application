@@ -65,7 +65,8 @@ const SigninPage = () => {
           setMessage(data.message);
         } else {
           const token = data.token;
-
+          const user = JSON.stringify(data.user)
+          localStorage.setItem('userData',user)
           localStorage.setItem('token',token)
           navigate("/home");
         }

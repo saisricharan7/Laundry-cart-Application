@@ -21,12 +21,15 @@ import Joggers from './images/joggers.jpg'
 import Others from './images/others.jpg'
 import Homeheader from "../Header/home_header";
 import "./home_page.css";
+import moment from "moment";
+import blueTick from './images/Blue_tick.PNG'
 
 const Home_page=()=>{
     const navigate = useNavigate();
     const [modal, setModal] = useState(false);
     const [popup,setPop]= useState(false);
     const token = localStorage.getItem("token");
+    const userData = JSON.parse(localStorage.getItem("userData"));
     const [shirt, setShirt] = useState({
         quantity:0,
         wash:null,
@@ -97,8 +100,8 @@ const Home_page=()=>{
     const othersTotal = others.wash+others.iron+others.dry+others.bleach;
     const othersGrandTotal = othersTotal*others.quantity;
     // const [bleach, setBleach] = useState(false);    
-    const [quantity, setQuantity] = useState(0);
-    console.log(shirt)
+    // const [quantity, setQuantity] = useState(0);
+    // console.log(shirt)
 
     // const toggle = () => {
     //     if(quantity>0) {
@@ -106,16 +109,269 @@ const Home_page=()=>{
     //         setShirt({...shirt,total:temp})
     //     }
     // }
-    console.log(shirt.total)
+    // console.log(shirt.total)
     // handle whether user is authorized or not if not navigate to sigin page
     useEffect(()=>{
         if(!token){
             navigate("/login")
         }
-        console.log(token)
+        console.log(token, userData )
     },[])
 
-  
+    function handleProceed(){
+        setModal(true);
+        //..........................
+        let shirtMethods = "";
+        if(shirt.quantity>0){
+            if(shirt.wash!==null){
+                shirtMethods = "washing "
+            }
+            if(shirt.iron!==null){
+                shirtMethods= shirtMethods+"ironing "
+            }
+            if(shirt.dry!==null){
+                shirtMethods= shirtMethods+"drying ";
+            }
+            if(shirt.bleach!==null){
+                shirtMethods= shirtMethods+"bleaching ";
+            }
+        }
+            const shirts = {
+                qty:shirt.quantity,
+                methods:shirtMethods,
+                denomination:`${shirt.quantity}x${shirtTotal}`,
+                item_price:shirtGrandTotal
+            }
+            //........................
+        let tshirtmethods = "";
+            if(t_shirt.quantity>0){
+                if(t_shirt.wash!==null){
+                    tshirtmethods = "washing ";
+                }
+                if(t_shirt.iron!==null){
+                    tshirtmethods= tshirtmethods+"ironing ";
+                }
+                if(t_shirt.dry!==null){
+                    tshirtmethods= tshirtmethods+"drying ";
+                }
+                if(t_shirt.bleach!==null){
+                    tshirtmethods= tshirtmethods+"bleaching ";
+                }
+            }
+                const Tshirts = {
+                    qty:t_shirt.quantity,
+                    methods:tshirtmethods,
+                    denomination:`${t_shirt.quantity}x${t_shirtTotal}`,
+                    item_price:t_shirtGrandTotal
+                }
+                //...........................
+        let trousermethods = "";
+                if(trouser.quantity>0){
+                    if(trouser.wash!==null){
+                        trousermethods = "washing ";
+                    }
+                    if(trouser.iron!==null){
+                        trousermethods= trousermethods+"ironing ";
+                    }
+                    if(trouser.dry!==null){
+                        trousermethods= trousermethods+"drying ";
+                    }
+                    if(trouser.bleach!==null){
+                        trousermethods= trousermethods+"bleaching ";
+                    }
+                }
+                    const Trousers = {
+                        qty:trouser.quantity,
+                        methods:trousermethods,
+                        denomination:`${trouser.quantity}x${trouserTotal}`,
+                        item_price:trouserGrandTotal
+                    }
+                    //.................................
+        let jeansmethods = "";
+                if(jeans.quantity>0){
+                    if(jeans.wash!==null){
+                        jeansmethods = "washing ";
+                    }
+                    if(jeans.iron!==null){
+                        jeansmethods= jeansmethods+"ironing ";
+                    }
+                    if(jeans.dry!==null){
+                        jeansmethods= jeansmethods+"drying ";
+                    }
+                    if(jeans.bleach!==null){
+                        jeansmethods= jeansmethods+"bleaching ";
+                    }
+                }
+                    const Jeans = {
+                        qty:jeans.quantity,
+                        methods:jeansmethods,
+                        denomination:`${jeans.quantity}x${jeansTotal}`,
+                        item_price:jeansGrandTotal
+                    }
+                    //..............................
+        let boxermethods = "";
+                if(boxers.quantity>0){
+                    if(boxers.wash!==null){
+                        boxermethods = "washing ";
+                    }
+                    if(boxers.iron!==null){
+                        boxermethods= boxermethods+"ironing ";
+                    }
+                    if(boxers.dry!==null){
+                        boxermethods= boxermethods+"drying ";
+                    }
+                    if(boxers.bleach!==null){
+                        boxermethods= boxermethods+"bleaching ";
+                    }
+                }
+                    const Boxers = {
+                        qty:boxers.quantity,
+                        methods:boxermethods,
+                        denomination:`${boxers.quantity}x${boxersTotal}`,
+                        item_price:boxersGrandTotal
+                    }
+                    //.................................
+        let joggermethods = "";
+                if(joggers.quantity>0){
+                    if(joggers.wash!==null){
+                        joggermethods = "washing ";
+                    }
+                    if(joggers.iron!==null){
+                        joggermethods= joggermethods+"ironing ";
+                    }
+                    if(joggers.dry!==null){
+                        joggermethods= joggermethods+"drying ";
+                    }
+                    if(joggers.bleach!==null){
+                        joggermethods= joggermethods+"bleaching ";
+                    }
+                }
+                    const Joggers = {
+                        qty:joggers.quantity,
+                        methods:joggermethods,
+                        denomination:`${joggers.quantity}x${joggersTotal}`,
+                        item_price:joggersGrandTotal
+                    }
+                    //..................................
+        let othermethods = "";
+                if(others.quantity>0){
+                    if(others.wash!==null){
+                        othermethods = "washing ";
+                    }
+                    if(others.iron!==null){
+                        othermethods= othermethods+"ironing ";
+                    }
+                    if(others.dry!==null){
+                        othermethods= othermethods+"drying ";
+                    }
+                    if(others.bleach!==null){
+                        othermethods= othermethods+"bleaching ";
+                    }
+                }
+                    const Others = {
+                        qty:others.quantity,
+                        methods:othermethods,
+                        denomination:`${others.quantity}x${othersTotal}`,
+                        item_price:othersGrandTotal
+                    }
+            //..............//...............//..................//................
+       
+        const item = Object.create({shirts,Tshirts,Trousers,Jeans,Boxers,Joggers,Others})
+        // console.log(item);
+        setFinalData({...finalData,items:item,total_items:totalItem,price:totalprice,user:userData.email});
+    }
+    const id = Math.floor(Math.random() * 10000)
+    const time = moment().format("D MMM YYYY, h:mm");
+    const totalItem = parseInt(shirt.quantity)+parseInt(t_shirt.quantity)+parseInt(trouser.quantity)+parseInt(jeans.quantity)+parseInt(boxers.quantity)+parseInt(joggers.quantity)+parseInt(others.quantity);
+    const totalprice = parseInt(shirtGrandTotal)+parseInt(t_shirtGrandTotal)+parseInt(trouserGrandTotal)+parseInt(jeansGrandTotal)+parseInt(boxersGrandTotal)+parseInt(joggersGrandTotal)+parseInt(othersGrandTotal);
+    // console.log(totalprice);
+    const [finalData, setFinalData] = useState({
+        user:"user",
+        order_id:`OR${id}`,
+        date_time:time,
+        store_location:"jp Nagar",
+        city:"bangalore",
+        store_phone:9999999999,
+        total_items:null,
+        price:null,
+        status:"Ready to pickup",
+        items:null,
+    })
+
+    function sendingOrder(){
+        setPop(true);setModal(false);
+    fetch(`/api_order/create`, {
+        method: "POST",
+        body: JSON.stringify({
+            user:finalData.user,
+            order_id:finalData.order_id,
+            date_time:finalData.date_time,
+            store_location:finalData.store_location,
+            city:finalData.city,
+            store_phone:finalData.store_phone,
+            total_items:finalData.total_items,
+            price:finalData.price,
+            status:finalData.status,
+            items:{
+                shirts:{
+                    qty:finalData.items.shirts.qty,
+                    methods:finalData.items.shirts.methods,
+                    denomination:finalData.items.shirts.denomination,
+                    item_price:finalData.items.shirts.item_price
+                },
+                Tshirts:{
+                    qty:finalData.items.Tshirts.qty,
+                    methods:finalData.items.Tshirts.methods,
+                    denomination:finalData.items.Tshirts.denomination,
+                    item_price:finalData.items.Tshirts.item_price
+                },
+                Trousers:{
+                    qty:finalData.items.Trousers.qty,
+                    methods:finalData.items.Trousers.methods,
+                    denomination:finalData.items.Trousers.denomination,
+                    item_price:finalData.items.Trousers.item_price
+                },
+                Jeans:{
+                    qty:finalData.items.Jeans.qty,
+                    methods:finalData.items.Jeans.methods,
+                    denomination:finalData.items.Jeans.denomination,
+                    item_price:finalData.items.Jeans.item_price
+                },
+                Boxers:{
+                    qty:finalData.items.Boxers.qty,
+                    methods:finalData.items.Boxers.methods,
+                    denomination:finalData.items.Boxers.denomination,
+                    item_price:finalData.items.Boxers.item_price
+                },
+                Joggers:{
+                    qty:finalData.items.Joggers.qty,
+                    methods:finalData.items.Joggers.methods,
+                    denomination:finalData.items.Joggers.denomination,
+                    item_price:finalData.items.Joggers.item_price
+                },
+                Others:{
+                    qty:finalData.items.Others.qty,
+                    methods:finalData.items.Others.methods,
+                    denomination:finalData.items.Others.denomination,
+                    item_price:finalData.items.Others.item_price
+                },
+            }
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((e) => {
+          alert(e.message);
+        });
+    }
+
+    console.log(finalData.items)
+
     return(
         <>
         <Homeheader/>
@@ -297,23 +553,67 @@ const Home_page=()=>{
                   </tbody>
                  </table>
                     <div >
-                    <button className="cancel-proceed" onClick={()=>setModal(true)}>Proceed</button><button className="cancel-proceed" onClick={()=> window.location.reload()}>Cancel</button>
+                    <button className="cancel-proceed" onClick={handleProceed}>Proceed</button><button className="cancel-proceed" onClick={()=> window.location.reload()}>Cancel</button>
                     </div>
                     {modal &&(<div className="modal">
                         <div className="overlay">
                         <div className="modal-content">
-                            <h1>hello modal</h1>
-                            <p>modal content</p>
+                            <div>
+                            <h1>Summary</h1>
                             <button className="close-modal" onClick={()=>{setModal(false)}}>x</button>
-                            <button onClick={()=>{setPop(true);setModal(false)}}>confirm</button>
+                            </div>
+                            <div className="modal_storeDetails">
+                                <div>
+                                    <h5>Store Location</h5>
+                                    <p>jp Nagar</p>
+                                </div>
+                                <div>
+                                    <h5>Store Address</h5>
+                                    <p>Near Phone booth, 10th road,</p>
+                                </div>
+                                <div>
+                                    <h5>Phone</h5>
+                                    <p>91 0123456789</p>
+                                </div>
+                            </div>
+                            <div>
+                                <h6>order details</h6>
+                                {shirt.quantity!=0?<div className="order_details"><span>Shirts</span><span>{finalData.items.shirts.methods}</span><span>{finalData.items.shirts.denomination}=</span><span>{shirtGrandTotal}</span></div>:<></>}
+
+                                {t_shirt.quantity!=0?<div className="order_details"><span>Tshirts</span><span>{finalData.items.Tshirts.methods}</span><span>{finalData.items.Tshirts.denomination}=</span><span>{t_shirtGrandTotal}</span></div>:<></>}
+
+                                {trouser.quantity!=0?<div className="order_details"><span>Trousers</span><span>{finalData.items.Trousers.methods}</span><span>{finalData.items.Trousers.denomination}=</span><span>{trouserGrandTotal}</span></div>:<></>}
+
+                                {jeans.quantity!=0?<div className="order_details"><span>Jeans</span><span>{finalData.items.Jeans.methods}</span><span>{finalData.items.Jeans.denomination}=</span><span>{jeansGrandTotal}</span></div>:<></>}
+
+                                {boxers.quantity!=0?<div className="order_details"><span>Boxers</span><span>{finalData.items.Boxers.methods}</span><span>{finalData.items.Boxers.denomination}=</span><span>{boxersGrandTotal}</span></div>:<></>}
+
+                                {joggers.quantity!=0?<div className="order_details"><span>Joggers</span><span>{finalData.items.Joggers.methods}</span><span>{finalData.items.Joggers.denomination}=</span><span>{joggersGrandTotal}</span></div>:<></>}
+
+                                {others.quantity!=0?<div className="order_details"><span>Others</span><span>{finalData.items.Others.methods}</span><span>{finalData.items.Others.denomination}=</span><span>{othersGrandTotal}</span></div>:<></>}
+                            </div>
+                            <div>
+                                <div><span>Sub total:</span><span>{finalData.price}</span></div>
+                                <div><span>Pickup Charges:</span><span>90</span></div>
+                                <div><span>Total:</span><span>{finalData.price+90}</span></div>
+                            </div>
+                            <div>
+                                <h5>Address</h5>
+                                <div>
+                                    <h3>Home</h3>
+                                    <span>{userData.main_Address} {userData.district} {userData.state} {userData.pincode} {userData.phone}</span>
+                                </div>
+                            </div>
+                            <button onClick={sendingOrder}>confirm</button>
                             </div>
                         </div>
                     </div>)}
                     {popup &&(<div className="modal">
                         <div className="overlay">
                         <div className="popup-content">
-                            <h1>hello popup</h1>
-                            <p>popup content</p>
+                            <img src={blueTick}/>
+                            <h1>Your order is successfully.</h1>
+                            <p>You can track the delivery in the "Orders" section.</p>
                             <button  onClick={()=>{setPop(false)}}>Go to orders</button>
                             </div>
                         </div>
