@@ -215,7 +215,15 @@ tr{
     margin-left: 5%;
     margin-right:5%;
   }
-
+  .modal_storeDetails{
+    display: flex;
+    gap: 100px;
+    margin-left: 50px;
+  }
+  .order_details{
+    display: flex;
+    justify-content: space-around;
+  }
   /* .head {
     background: black;
     color: white;

@@ -13,15 +13,37 @@ const History=()=>{
     const token =  localStorage.getItem("token");
     const [cancel_popup,setCancel]= useState(false);
     const [historymodal, setHistoryModal] = useState(false);
-    const [shirt, setShirt] = useState(null);
-    const [jeans, setJeans] = useState(null);
-    const [trousers, setTrousers] = useState(null);
-    const [t_shirt, setT_shirt] = useState(null);
-    const [boxers, setBoxers] = useState(null);
-    const [others, setOthers] = useState(null);
-    const [joggers,setJoggers]= useState(null);
+    const [shirt, setShirt] = useState({qty:0,
+                                    methods:"",
+                                    denomination:"",
+                                    item_price:0});
+    const [jeans, setJeans] = useState({qty:0,
+        methods:"",
+        denomination:"",
+        item_price:0});
+    const [trousers, setTrousers] = useState({qty:0,
+        methods:"",
+        denomination:"",
+        item_price:0});
+    const [t_shirt, setT_shirt] = useState({qty:0,
+        methods:"",
+        denomination:"",
+        item_price:0});
+    const [boxers, setBoxers] = useState({qty:0,
+        methods:"",
+        denomination:"",
+        item_price:0});
+    const [others, setOthers] = useState({qty:0,
+        methods:"",
+        denomination:"",
+        item_price:0});
+    const [joggers,setJoggers]= useState({qty:0,
+        methods:"",
+        denomination:"",
+        item_price:0});
     const [sub_total,setSub_total]=useState(0)
     const [id,setItemid]= useState('');
+    const user =JSON.parse(window.localStorage.getItem("userData")) 
     let data,post;
     let products=[];
     let headers = { "Authorization": token };
@@ -66,50 +88,53 @@ const History=()=>{
             const eachItem= history[i]
             if(eachItem._id===key){
                 req_item=eachItem
+                console.log(req_item)
                 setSub_total(req_item.price)
                 products=req_item.items
             }
         }
-        console.log(products)
-        Object.keys(products).map((each)=>{
-                if(each==="shirts"){
-                    setShirt(products[each])
-                    console.log(products[each].item_price)
-                    // setSub_total(sub_total+parseInt(products[each].item_price))
-                    // console.log(sub_total)
-                }
-                else if(each==="Jeans"){
-                    setJeans(products[each])
-                    // setSub_total(sub_total+parseInt(products[each].item_price))
-                }
-                else if(each==="Trousers"){
-                    setTrousers(products[each])
-                    // setSub_total(sub_total+parseInt(products[each].item_price))
-                }
-                else if(each==="Boxers"){
-                    setBoxers(products[each])
-                    // setSub_total(sub_total+parseInt(products[each].item_price))
-                }
-                else if(each=="Tshirts"){
-                    setT_shirt(products[each])
-                    // setSub_total(sub_total+parseInt(products[each].item_price))
-                }
-                else if(each==="Joggers"){
-                    setJoggers(products[each])
-                    // setSub_total(sub_total+parseInt(products[each].item_price))
-                }
-                else{
-                    setOthers(products[each])
-                    // setSub_total(sub_total+parseInt(products[each].item_price))
-                }
-            })
+        console.log(products.shirts.qty)
+        //  for(let each in products){
+        //         if(each==="shirts"){
+        //             setShirt(...shirt,products.each)
+        //             console.log(products.each)
+        //             console.log(shirt)
+        //             // setSub_total(sub_total+parseInt(products[each].item_price))
+        //             // console.log(sub_total)
+        //         }
+        //         else if(each==="Jeans"){
+        //             setJeans(...jeans,products[each])
+        //             // setSub_total(sub_total+parseInt(products[each].item_price))
+        //         }
+        //         else if(each==="Trousers"){
+        //             setTrousers(...trousers,products[each])
+        //             // setSub_total(sub_total+parseInt(products[each].item_price))
+        //         }
+        //         else if(each==="Boxers"){
+        //             setBoxers(...boxers,products[each])
+        //             // setSub_total(sub_total+parseInt(products[each].item_price))
+        //         }
+        //         else if(each=="Tshirts"){
+        //             setT_shirt(...t_shirt,products[each])
+        //             // setSub_total(sub_total+parseInt(products[each].item_price))
+        //         }
+        //         else if(each==="Joggers"){
+        //             setJoggers(...joggers,products[each])
+        //             // setSub_total(sub_total+parseInt(products[each].item_price))
+        //         }
+        //         else{
+        //             setOthers(...others,products[each])
+        //             // setSub_total(sub_total+parseInt(products[each].item_price))
+        //         }
+        //     }
     }
 
     useEffect(async ()=>{
         try {
-            await axios.post("/api_order/get_orders", null, { headers }).then( (res)=>{data=res.data})
+            await axios.post(`/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
             post = data.post
             console.log(post)
+            console.log(user.email);
             setHistory(data.post)
 
           } catch (error) {
@@ -172,13 +197,13 @@ const History=()=>{
                             <div className="modal-header">Summary <span className="close-modal" onClick={()=>{Historyclose()}}>X</span></div>
                             <div className="modal-body">
                                 <p style={{"color":"#3B3737"}}>orders</p>
-                               {shirt!=null?<div className="each-item"><span>Shirts</span><span>{shirt.methods}</span><span>{shirt.denomination} =</span><span>{shirt.item_price}</span></div>:<></>}
-                               {jeans!=null?<div className="each-item"><span>Jeans</span><span>{jeans.methods}</span><span>{jeans.denomination} =</span><span>{jeans.item_price}</span></div>:<></>}
-                               {trousers!=null?<div className="each-item"><span>Trousers</span><span>{trousers.methods}</span><span>{trousers.denomination} =</span><span>{trousers.item_price}</span></div>:<></>}
-                               {t_shirt!=null?<div className="each-item"><span>Tshirts</span><span>{t_shirt.methods}</span><span>{t_shirt.denomination} =</span><span>{t_shirt.item_price}</span></div>:<></>}
-                               {joggers!=null?<div className="each-item"><span>Joggers</span><span>{joggers.methods}</span><span>{joggers.denomination} =</span><span>{joggers.item_price}</span></div>:<></>}
-                               {boxers!=null?<div className="each-item"><span>Boxers</span><span>{boxers.methods}</span><span>{boxers.denomination} =</span><span>{boxers.item_price}</span></div>:<></>}
-                               {others!=null?<div className="each-item"><span>Others</span><span>{others.methods}</span><span>{others.denomination} =</span><span>{others.item_price}</span></div>:<></>}
+                               {products.shirts.qty>0?<div><span>Shirts</span><span>{products.shirts.methods}</span><span>{products.shirts.denomination} =</span><span>{products.shirts.item_price}</span></div>:<></>}
+                               {/* {products.jeans.qty!=0?<div className="each-item"><span>Jeans</span><span>{jeans.methods}</span><span>{jeans.denomination} =</span><span>{jeans.item_price}</span></div>:<></>}
+                               {products.trousers.qty!=0?<div className="each-item"><span>Trousers</span><span>{trousers.methods}</span><span>{trousers.denomination} =</span><span>{trousers.item_price}</span></div>:<></>}
+                               {products.t_shirt.qty!=0?<div className="each-item"><span>Tshirts</span><span>{t_shirt.methods}</span><span>{t_shirt.denomination} =</span><span>{t_shirt.item_price}</span></div>:<></>}
+                               {products.joggers.qty!=0?<div className="each-item"><span>Joggers</span><span>{joggers.methods}</span><span>{joggers.denomination} =</span><span>{joggers.item_price}</span></div>:<></>}
+                               {products.boxers.qty!=0?<div className="each-item"><span>Boxers</span><span>{boxers.methods}</span><span>{boxers.denomination} =</span><span>{boxers.item_price}</span></div>:<></>}
+                               {products.others.qty!=0?<div className="each-item"><span>Others</span><span>{others.methods}</span><span>{others.denomination} =</span><span>{others.item_price}</span></div>:<></>} */}
                                <div>Sub Total :{sub_total}</div>
                                <div>Pick up charges : 90</div>
                                <div>Total : {parseInt(sub_total)+90}</div>
