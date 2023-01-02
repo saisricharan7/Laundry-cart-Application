@@ -23,10 +23,13 @@ import Homeheader from "../Header/home_header";
 import "./home_page.css";
 
 const Home_page=()=>{
+    const current= new Date();
+    const up_date=`${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}`
     const navigate = useNavigate();
     const [modal, setModal] = useState(false);
     const [popup,setPop]= useState(false);
     const token = localStorage.getItem("token");
+    const userdata=JSON.parse(localStorage.getItem('userData'));
     const [shirt, setShirt] = useState({
         quantity:0,
         wash:null,
@@ -112,7 +115,7 @@ const Home_page=()=>{
         if(!token){
             navigate("/login")
         }
-        console.log(token)
+        console.log(userdata)
     },[])
 
   
@@ -297,7 +300,7 @@ const Home_page=()=>{
                   </tbody>
                  </table>
                     <div >
-                    <button className="cancel-proceed" onClick={()=>setModal(true)}>Proceed</button><button className="cancel-proceed" onClick={()=> window.location.reload()}>Cancel</button>
+                    <button className="cancel-proceed" onClick={()=>{setModal(true);console.log(up_date)}}>Proceed</button><button className="cancel-proceed" onClick={()=> window.location.reload()}>Cancel</button>
                     </div>
                     {modal &&(<div className="modal">
                         <div className="overlay">
@@ -314,7 +317,7 @@ const Home_page=()=>{
                         <div className="popup-content">
                             <h1>hello popup</h1>
                             <p>popup content</p>
-                            <button  onClick={()=>{setPop(false)}}>Go to orders</button>
+                            <button  onClick={()=>{setPop(false);navigate('/history')}}>Go to orders</button>
                             </div>
                         </div>
                         </div>)}

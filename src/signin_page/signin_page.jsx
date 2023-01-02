@@ -8,6 +8,7 @@ import Footer3 from "../Footer/footer3";
 const URL = process.env.REACT_APP_API_URL || "http://localhost:3001";
 
 const SigninPage = () => {
+ 
   const navigate = useNavigate();
   const [errorMsg, setErrorMsg] = useState("");
   const [passErrorMsg, setPassErrorMsg] = useState("");
@@ -60,13 +61,14 @@ const SigninPage = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log(data.user);
         if (data.status === "Failed") {
           setMessage(data.message);
         } else {
           const token = data.token;
-
+          const user=JSON.stringify( data.user);
           localStorage.setItem('token',token)
+          localStorage.setItem('userData',user)
           navigate("/home");
         }
       })
