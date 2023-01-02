@@ -558,8 +558,8 @@ const Home_page=()=>{
                     {modal &&(<div className="modal">
                         <div className="overlay">
                         <div className="modal-content">
-                            <div>
-                            <h1>Summary</h1>
+                            <div className="summary-div">
+                            <p>Summary</p>
                             <button className="close-modal" onClick={()=>{setModal(false)}}>x</button>
                             </div>
                             <div className="modal_storeDetails">
@@ -576,8 +576,8 @@ const Home_page=()=>{
                                     <p>91 0123456789</p>
                                 </div>
                             </div>
-                            <div>
-                                <h6>order details</h6>
+                            <div className="order_div">
+                                <h5>order details</h5>
                                 {shirt.quantity!=0?<div className="order_details"><span>Shirts</span><span>{finalData.items.shirts.methods}</span><span>{finalData.items.shirts.denomination}=</span><span>{shirtGrandTotal}</span></div>:<></>}
 
                                 {t_shirt.quantity!=0?<div className="order_details"><span>Tshirts</span><span>{finalData.items.Tshirts.methods}</span><span>{finalData.items.Tshirts.denomination}=</span><span>{t_shirtGrandTotal}</span></div>:<></>}
@@ -592,12 +592,12 @@ const Home_page=()=>{
 
                                 {others.quantity!=0?<div className="order_details"><span>Others</span><span>{finalData.items.Others.methods}</span><span>{finalData.items.Others.denomination}=</span><span>{othersGrandTotal}</span></div>:<></>}
                             </div>
-                            <div>
-                                <div><span>Sub total:</span><span>{finalData.price}</span></div>
-                                <div><span>Pickup Charges:</span><span>90</span></div>
-                                <div><span>Total:</span><span>{finalData.price+90}</span></div>
+                            <div className="total_div">
+                                <div className="total_div1"><span>Sub total:</span><span className="sub_total">{finalData.price}</span></div>
+                                <div className="total_div1"><span>Pickup Charges:</span><span className="pickup_div">90</span></div>
+                                <div className="total_div2"><span>Total:</span><span className="sub_total">{finalData.price+90}</span></div>
                             </div>
-                            <div>
+                            <div className="address_div">
                                 <h5>Address</h5>
                                 <div>
                                     <h3>Home</h3>
