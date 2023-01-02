@@ -8,10 +8,10 @@ router.use(bodyparser.json());
 
 router.post('/create',Auth, async(req,res)=>{
     try{
-        const {order_id,date_time,store_location,city,store_phone,
+        const {user,order_id,date_time,store_location,city,store_phone,
         total_items,price,status,items}=req.body
         const newOrder= await Orders({
-            user: res.user.id,
+            user: user,
         order_id,date_time,store_location,city,store_phone,
         total_items,price,status,items
 
@@ -37,10 +37,10 @@ router.post('/create',Auth, async(req,res)=>{
 router.post('/get_orders',Auth,async(req,res)=>{
   
     try{
-        const {id} = res.user
+        const {email} = res.user
       // const decoded =  jwt.verify(token,process.env.JWT_SECRET_KEY)
        console.log(req.user)
-        const Item=await Orders.find({user:id})
+        const Item=await Orders.find({user:email})
 
      
      res.status(200).json({

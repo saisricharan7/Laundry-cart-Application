@@ -57,9 +57,9 @@ router.post('/login',async(req,res)=>{
         const {email,password} = req.body;
         const userbyMail = await Users.find({email});
         const userbyPhone= await Users.find({phone:email})
-        const user = userbyMail.length ? userbyMail[0] : userbyPhone[0]
-        console.log(user._id)
-        if (user){
+        let user;
+        if (userbyMail.length || userbyPhone.length){
+             user = userbyMail.length ? userbyMail[0]: userbyPhone[0]
             var result = await bcrypt.compare(password,user.password)
         }
         else{
@@ -76,6 +76,7 @@ router.post('/login',async(req,res)=>{
                 token,
                 user
             })
+            console.log(token);
         }
         else{
             res.status(400).json({
