@@ -8,16 +8,6 @@ const Auth= require("../middleware/auth");
 
 router.use(bodyparser.json());
 
-router.post("/isLoggedIn", Auth, async (req, res) => {
-    try {
-        const user = await Users.findOne({ _id: res.user.id })
-        return res.status(200).json(user)
-    } catch (error) {
-        res.status(500).json({ error: error.message })
-    }
-})
-
-
 router.post('/register',async (req,res)=>{
     try{
         const {name,email,password,phone,state,district,pincode,main_Address}=req.body;
