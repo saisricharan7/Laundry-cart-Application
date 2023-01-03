@@ -113,12 +113,7 @@ const Home_page=()=>{
     // }
     // console.log(shirt.total)
     // handle whether user is authorized or not if not navigate to sigin page
-    useEffect(()=>{
-        if(!token){
-            navigate("/login")
-        }
-        console.log(token, userData )
-    },[])
+
 
     function handleProceed(){
         setModal(true);
@@ -375,7 +370,17 @@ const Home_page=()=>{
         setPop(false);
         navigate("/history");
     }
-
+    useEffect(()=>{
+        try{
+            if(!token){
+                navigate("/login")
+            }
+        }
+        catch(e){
+            console.log(e)
+        }
+        
+    },[])
     console.log(finalData.items)
 
     return(
@@ -387,7 +392,7 @@ const Home_page=()=>{
             <div className="home-sidebar">
                 <div><img src={homelogo}></img></div>
                 <div style={{"backgroundColor":"white"}}><img src={more}></img></div>
-                <div><img src={list}></img></div>
+                <div><img src={list} onClick={()=>{navigate("/history")}}></img></div>
             </div>
             <div className="table-div">
             <div className='create-search'>

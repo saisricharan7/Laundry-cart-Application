@@ -9,6 +9,25 @@
         padding-top: 15px;
 
 }
+.create-search-history strong{
+  float:left;
+  margin: 10px;
+  font: normal normal  Open Sans;
+  font-size: larger;
+}
+.create-history{
+  float:right;
+  margin:10px;
+  width: 81px;
+  height: 32px;
+  border: 1px solid #5861AE;
+  border-radius: 4px;
+  padding: 0.8px;
+  font: normal normal  Open Sans;
+ 
+  color: #5861AE;
+  opacity: 1;
+}
 .history-body{
     display:flex;
   }

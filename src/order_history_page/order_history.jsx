@@ -1,15 +1,18 @@
 import React from "react";
 import { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import homelogo from './images/home-logo.png';
-import more from './images/more.png';
-import list from './images/list.png';
+import more2 from './images/more2.png';
+import list2 from './images/list2.png';
 import view from './images/view.png';
 import Homeheader from "../Header/home_header";
 import './order_history.css';
-import axios from 'axios'
-import alert_img from './images/cancel_img.PNG'
+import axios from 'axios';
+import alert_img from './images/cancel_img.PNG';
 
 const History=()=>{
+    const navigate = useNavigate();
+    
     const[history,setHistory]= useState([]);
     const token =  localStorage.getItem("token");
     const [cancel_popup,setCancel]= useState(false);
@@ -57,17 +60,21 @@ const History=()=>{
   
     }
 
-    useEffect(async ()=>{
+    useEffect(()=>{
+        if(!token){
+            navigate("/login")
+            }
+        const getdata=async ()=>{
         try {
-            await axios.post(`/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
+           await axios.post(`/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
             post = data.post
-            console.log(post)
-            console.log(user.email);
             setHistory(data.post)
 
           } catch (error) {
             console.log(error);
-          }
+          }         
+        }
+        getdata()
     },[])
     // 
    
@@ -77,13 +84,14 @@ const History=()=>{
          <div className="history-body">
             <div className="history-sidebar">
                 <div><img src={homelogo}></img></div>
-                <div style={{"backgroundColor":"white"}}><img src={more}></img></div>
-                <div><img src={list}></img></div>
+                <div ><img src={more2} onClick={()=>{navigate("/home")}}></img></div>
+                <div style={{"backgroundColor":"white"}}><img src={list2}></img></div>
             </div>
             <div className="history-table-div">
                 <div className='create-search-history'>
-                    <span className='create-history'>Create</span>
-                    <span className='search-history'>Search</span>
+                    <strong>Orders</strong>
+                    <button className='create-history'  onClick={()=>{navigate("/home")}}>Create</button>
+                    {/* <span className='search-history'>Search</span> */}
                 </div>
                 <table>
                     <thead className="history-thead">
@@ -139,13 +147,13 @@ const History=()=>{
                             </div>
                             <div className="historyOrder_boby">
                                 <h5>order details</h5>
-                               {products.shirts.qty>0?<div className="historyOrder_div"><span>Shirts</span><span>{products.shirts.methods}</span><span>{products.shirts.denomination} =</span><span>{products.shirts.item_price}</span></div>:<></>}
-                               {products.Jeans.qty!=0?<div className="historyOrder_div"><span>Jeans</span><span>{products.Jeans.methods}</span><span>{products.Jeans.denomination} =</span><span>{products.Jeans.item_price}</span></div>:<></>}
-                               {products.Trousers.qty!=0?<div className="historyOrder_div"><span>Trousers</span><span>{products.Trousers.methods}</span><span>{products.Trousers.denomination} =</span><span>{products.Trousers.item_price}</span></div>:<></>}
-                               {products.Tshirts.qty!=0?<div className="historyOrder_div"><span>Tshirts</span><span>{products.Tshirts.methods}</span><span>{products.Tshirts.denomination} =</span><span>{products.Tshirts.item_price}</span></div>:<></>}
-                               {products.Joggers.qty!=0?<div className="historyOrder_div"><span>Joggers</span><span>{products.Joggers.methods}</span><span>{products.Joggers.denomination} =</span><span>{products.Joggers.item_price}</span></div>:<></>}
-                               {products.Boxers.qty!=0?<div className="historyOrder_div"><span>Boxers</span><span>{products.Boxers.methods}</span><span>{products.Boxers.denomination} =</span><span>{products.Boxers.item_price}</span></div>:<></>}
-                               {products.Others.qty!=0?<div className="historyOrder_div"><span>Others</span><span>{products.Others.methods}</span><span>{products.Others.denomination} =</span><span>{products.Others.item_price}</span></div>:<></>}
+                               {products.shirts.qty!==0?<div className="historyOrder_div"><span>Shirts</span><span>{products.shirts.methods}</span><span>{products.shirts.denomination} =</span><span>{products.shirts.item_price}</span></div>:<></>}
+                               {products.Jeans.qty!==0?<div className="historyOrder_div"><span>Jeans</span><span>{products.Jeans.methods}</span><span>{products.Jeans.denomination} =</span><span>{products.Jeans.item_price}</span></div>:<></>}
+                               {products.Trousers.qty!==0?<div className="historyOrder_div"><span>Trousers</span><span>{products.Trousers.methods}</span><span>{products.Trousers.denomination} =</span><span>{products.Trousers.item_price}</span></div>:<></>}
+                               {products.Tshirts.qty!==0?<div className="historyOrder_div"><span>Tshirts</span><span>{products.Tshirts.methods}</span><span>{products.Tshirts.denomination} =</span><span>{products.Tshirts.item_price}</span></div>:<></>}
+                               {products.Joggers.qty!==0?<div className="historyOrder_div"><span>Joggers</span><span>{products.Joggers.methods}</span><span>{products.Joggers.denomination} =</span><span>{products.Joggers.item_price}</span></div>:<></>}
+                               {products.Boxers.qty!==0?<div className="historyOrder_div"><span>Boxers</span><span>{products.Boxers.methods}</span><span>{products.Boxers.denomination} =</span><span>{products.Boxers.item_price}</span></div>:<></>}
+                               {products.Others.qty!==0?<div className="historyOrder_div"><span>Others</span><span>{products.Others.methods}</span><span>{products.Others.denomination} =</span><span>{products.Others.item_price}</span></div>:<></>}
                             </div>
                             <div className="historyTotal_div">
                                <div className="historyTotal_div1"><span>Sub Total :</span><span className="historySub_total"><b>{sub_total}</b></span></div>
