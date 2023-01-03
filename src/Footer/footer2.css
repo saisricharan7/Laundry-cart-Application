@@ -1,6 +1,8 @@
 .footer2 {
     display: grid;
     grid-template-columns: 15% 15% 15% 15%;
+    height: 200px;
+    padding-top: 25px;
   }
   
   .footer2_title {
@@ -41,13 +43,13 @@
     opacity: 1;
   }
   
-  .footer2_first__ul {
+  /* .footer2_first__ul {
     list-style: none;
     margin: 20px;
   }
   .footer2_first__ul li {
     padding: 10px;
-  }
+  } */
   
   .footer2_sec3 {
     margin-top: 10px;
@@ -59,4 +61,22 @@
   }
   .footer2_socialmedia__icons {
     width: 40px;
+  }
+  .footer_div1{
+    display: flex;
+    column-gap: 80px;
+    margin-left: -100px;
+    font-weight: bold;
+  }
+  .footer_div2{
+    display: flex;
+    position: relative;
+    top: 40px;
+    left: 105px;
+    column-gap: 200px;
+  }
+  .inside_div{
+    display: flex;
+    row-gap: 25px;
+    flex-direction: column;
   }

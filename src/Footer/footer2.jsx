@@ -12,20 +12,28 @@ const Footer2 = () => {
         <p className="footer2_para">Doorstep Wash & Dryclean Service</p>
       </section>
       <section className="footer2_sec2">
-        <ul className="footer2_first__ul">
+        {/* <ul className="footer2_first__ul"> */}
+        <div className="footer_div1">
           <li>Home</li>
-          <li>Sign In</li>
-          <li>Register</li>
           <li>Pricing</li>
-        </ul>
+          <li>Career</li>
+          <li>Contact</li>
+        </div>
+        {/* </ul> */}
       </section>
       <section className="footer2_sec3">
-        <ul className="footer2_first__ul">
-          <li>Career</li>
+        {/* <ul className="footer2_first__ul"> */}
+        <div className="footer_div2">
+          <div className="inside_div">
+          <li>Sign In</li>
+          <li>Register</li>
+          </div>
+          <div className="inside_div">
           <li>Blogs</li>
           <li>Create</li>
-          <li>Contact</li>
-        </ul>
+          </div>
+        </div>
+        {/* </ul> */}
       </section>
 
       <section className="footer2_sec2">
