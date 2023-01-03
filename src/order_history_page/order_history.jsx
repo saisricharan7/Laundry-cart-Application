@@ -7,45 +7,19 @@ import view from './images/view.png';
 import Homeheader from "../Header/home_header";
 import './order_history.css';
 import axios from 'axios'
+import alert_img from './images/cancel_img.PNG'
 
 const History=()=>{
     const[history,setHistory]= useState([]);
     const token =  localStorage.getItem("token");
     const [cancel_popup,setCancel]= useState(false);
     const [historymodal, setHistoryModal] = useState(false);
-    const [shirt, setShirt] = useState({qty:0,
-                                    methods:"",
-                                    denomination:"",
-                                    item_price:0});
-    const [jeans, setJeans] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [trousers, setTrousers] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [t_shirt, setT_shirt] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [boxers, setBoxers] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [others, setOthers] = useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
-    const [joggers,setJoggers]= useState({qty:0,
-        methods:"",
-        denomination:"",
-        item_price:0});
+  
     const [sub_total,setSub_total]=useState(0)
     const [id,setItemid]= useState('');
     const user =JSON.parse(window.localStorage.getItem("userData")) 
     let data,post;
-    let products=[];
+    const [products,setProducts]= useState()
     let headers = { "Authorization": token };
   
     const HandleCancelOrder=async ()=>{
@@ -58,28 +32,14 @@ const History=()=>{
     }
     const Historyclose=()=>{
         setHistoryModal(false);
-        setBoxers(null);
-        setJeans(null);
-        setJoggers(null);
-        setShirt(null);
-        setOthers(null);
-        setT_shirt(null);
-        setTrousers(null);
+
         // setSub_total(0);
     }
     
     const Cancel_order_btn=()=>{
         setHistoryModal(false);
         setCancel(true);
-        setHistoryModal(false);
-        setBoxers(null);
-        setJeans(null);
-        setJoggers(null);
-        setShirt(null);
-        setOthers(null);
-        setT_shirt(null);
-        setTrousers(null);
-        // setSub_total(0);
+
     }
     const HandleHistorySummary=async (key)=>{
         setHistoryModal(true)
@@ -90,43 +50,11 @@ const History=()=>{
                 req_item=eachItem
                 console.log(req_item)
                 setSub_total(req_item.price)
-                products=req_item.items
+             
+                setProducts(req_item.items)
             }
         }
-        console.log(products.shirts.qty)
-        //  for(let each in products){
-        //         if(each==="shirts"){
-        //             setShirt(...shirt,products.each)
-        //             console.log(products.each)
-        //             console.log(shirt)
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //             // console.log(sub_total)
-        //         }
-        //         else if(each==="Jeans"){
-        //             setJeans(...jeans,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else if(each==="Trousers"){
-        //             setTrousers(...trousers,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else if(each==="Boxers"){
-        //             setBoxers(...boxers,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else if(each=="Tshirts"){
-        //             setT_shirt(...t_shirt,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else if(each==="Joggers"){
-        //             setJoggers(...joggers,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //         else{
-        //             setOthers(...others,products[each])
-        //             // setSub_total(sub_total+parseInt(products[each].item_price))
-        //         }
-        //     }
+  
     }
 
     useEffect(async ()=>{
@@ -194,33 +122,62 @@ const History=()=>{
             {historymodal &&(<div className="modal">
                         <div className="overlay">
                         <div className="modal-content">
-                            <div className="modal-header">Summary <span className="close-modal" onClick={()=>{Historyclose()}}>X</span></div>
-                            <div className="modal-body">
-                                <p style={{"color":"#3B3737"}}>orders</p>
-                               {products.shirts.qty>0?<div><span>Shirts</span><span>{products.shirts.methods}</span><span>{products.shirts.denomination} =</span><span>{products.shirts.item_price}</span></div>:<></>}
-                               {/* {products.jeans.qty!=0?<div className="each-item"><span>Jeans</span><span>{jeans.methods}</span><span>{jeans.denomination} =</span><span>{jeans.item_price}</span></div>:<></>}
-                               {products.trousers.qty!=0?<div className="each-item"><span>Trousers</span><span>{trousers.methods}</span><span>{trousers.denomination} =</span><span>{trousers.item_price}</span></div>:<></>}
-                               {products.t_shirt.qty!=0?<div className="each-item"><span>Tshirts</span><span>{t_shirt.methods}</span><span>{t_shirt.denomination} =</span><span>{t_shirt.item_price}</span></div>:<></>}
-                               {products.joggers.qty!=0?<div className="each-item"><span>Joggers</span><span>{joggers.methods}</span><span>{joggers.denomination} =</span><span>{joggers.item_price}</span></div>:<></>}
-                               {products.boxers.qty!=0?<div className="each-item"><span>Boxers</span><span>{boxers.methods}</span><span>{boxers.denomination} =</span><span>{boxers.item_price}</span></div>:<></>}
-                               {products.others.qty!=0?<div className="each-item"><span>Others</span><span>{others.methods}</span><span>{others.denomination} =</span><span>{others.item_price}</span></div>:<></>} */}
-                               <div>Sub Total :{sub_total}</div>
-                               <div>Pick up charges : 90</div>
-                               <div>Total : {parseInt(sub_total)+90}</div>
+                            <div className="modal-header">Summary <button className="close-modal" onClick={()=>{Historyclose()}}>X</button></div>
+                            <div className="historyModal_storeDetails">
+                                <div>
+                                    <h5>Store Location</h5>
+                                    <p>jp Nagar</p>
+                                </div>
+                                <div>
+                                    <h5>Store Address</h5>
+                                    <p>Near Phone booth, 10th road,</p>
+                                </div>
+                                <div>
+                                    <h5>Phone</h5>
+                                    <p>91 0123456789</p>
+                                </div>
                             </div>
-                            
-                            <button onClick={()=>{Cancel_order_btn()}}>cancel order</button>
+                            <div className="historyOrder_boby">
+                                <h5>order details</h5>
+                               {products.shirts.qty>0?<div className="historyOrder_div"><span>Shirts</span><span>{products.shirts.methods}</span><span>{products.shirts.denomination} =</span><span>{products.shirts.item_price}</span></div>:<></>}
+                               {products.Jeans.qty!=0?<div className="historyOrder_div"><span>Jeans</span><span>{products.Jeans.methods}</span><span>{products.Jeans.denomination} =</span><span>{products.Jeans.item_price}</span></div>:<></>}
+                               {products.Trousers.qty!=0?<div className="historyOrder_div"><span>Trousers</span><span>{products.Trousers.methods}</span><span>{products.Trousers.denomination} =</span><span>{products.Trousers.item_price}</span></div>:<></>}
+                               {products.Tshirts.qty!=0?<div className="historyOrder_div"><span>Tshirts</span><span>{products.Tshirts.methods}</span><span>{products.Tshirts.denomination} =</span><span>{products.Tshirts.item_price}</span></div>:<></>}
+                               {products.Joggers.qty!=0?<div className="historyOrder_div"><span>Joggers</span><span>{products.Joggers.methods}</span><span>{products.Joggers.denomination} =</span><span>{products.Joggers.item_price}</span></div>:<></>}
+                               {products.Boxers.qty!=0?<div className="historyOrder_div"><span>Boxers</span><span>{products.Boxers.methods}</span><span>{products.Boxers.denomination} =</span><span>{products.Boxers.item_price}</span></div>:<></>}
+                               {products.Others.qty!=0?<div className="historyOrder_div"><span>Others</span><span>{products.Others.methods}</span><span>{products.Others.denomination} =</span><span>{products.Others.item_price}</span></div>:<></>}
+                            </div>
+                            <div className="historyTotal_div">
+                               <div className="historyTotal_div1"><span>Sub Total :</span><span className="historySub_total"><b>{sub_total}</b></span></div>
+
+                               <div className="historyTotal_div1"><span>Pick up charges :</span><span className="historyPickup_div"><b>90</b></span></div>
+
+                               <div className="historyTotal_blue"><span>Total :</span><span className="historySub_total"><b>{parseInt(sub_total)+90}</b></span></div>
+                            </div>
+                            <div className="historyAddress_div">
+                                <h5>Address</h5>
+                                <div className="historySquare_div">
+                                    <h3>Home</h3>
+                                    <span>{user.main_Address} {user.district} {user.state} {user.pincode} {user.phone}</span>
+                                </div>
+                            </div>
+                            <button className="history_cancel_btn" onClick={()=>{Cancel_order_btn()}}>cancel order</button>
                             </div>
                         </div>
                     </div>)}
             {cancel_popup &&(<div className="modal">
                         <div className="overlay">
-                        <div className="popup-content">
-                            <h1>hello popup</h1>
-                            <p>popup content</p>
-                            <button onClick={HandleCancelOrder}>cancel</button>
-                            </div>
+                        <div className="historyPopup-content">
+                        <div className="historyAlert_div">
+                            <p className="history_alert_color">Alert</p><button className="historysideclose_btn" onClick={()=>setCancel(false)}>X</button>
+                        </div>  
+                        <div className="historyAlert_msgDiv">
+                            <img className="historyIMG" src={alert_img}></img>
+                            <p>Are you sure want to cancel the order</p>
                         </div>
+                            <button className="historyProceed_btnDiv" onClick={HandleCancelOrder}>Proceed</button>
+                        </div>
+                        </div> 
                         </div>)}
          </div>
 

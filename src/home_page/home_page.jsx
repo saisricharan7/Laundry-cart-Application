@@ -584,43 +584,45 @@ const Home_page=()=>{
                             </div>
                             <div className="order_div">
                                 <h5>order details</h5>
-                                {shirt.quantity!=0?<div className="order_details"><span>Shirts</span><span>{finalData.items.shirts.methods}</span><span>{finalData.items.shirts.denomination}=</span><span>{shirtGrandTotal}</span></div>:<></>}
+                                {shirt.quantity!=0?<div className="order_details"><span>Shirts</span><span><i>{finalData.items.shirts.methods}</i></span><span>{finalData.items.shirts.denomination}=</span><span>{shirtGrandTotal}</span></div>:<></>}
 
-                                {t_shirt.quantity!=0?<div className="order_details"><span>Tshirts</span><span>{finalData.items.Tshirts.methods}</span><span>{finalData.items.Tshirts.denomination}=</span><span>{t_shirtGrandTotal}</span></div>:<></>}
+                                {t_shirt.quantity!=0?<div className="order_details"><span>Tshirts</span><span><i>{finalData.items.Tshirts.methods}</i></span><span>{finalData.items.Tshirts.denomination}=</span><span>{t_shirtGrandTotal}</span></div>:<></>}
 
-                                {trouser.quantity!=0?<div className="order_details"><span>Trousers</span><span>{finalData.items.Trousers.methods}</span><span>{finalData.items.Trousers.denomination}=</span><span>{trouserGrandTotal}</span></div>:<></>}
+                                {trouser.quantity!=0?<div className="order_details"><span>Trousers</span><span><i>{finalData.items.Trousers.methods}</i></span><span>{finalData.items.Trousers.denomination}=</span><span>{trouserGrandTotal}</span></div>:<></>}
 
-                                {jeans.quantity!=0?<div className="order_details"><span>Jeans</span><span>{finalData.items.Jeans.methods}</span><span>{finalData.items.Jeans.denomination}=</span><span>{jeansGrandTotal}</span></div>:<></>}
+                                {jeans.quantity!=0?<div className="order_details"><span>Jeans</span><span><i>{finalData.items.Jeans.methods}</i></span><span>{finalData.items.Jeans.denomination}=</span><span>{jeansGrandTotal}</span></div>:<></>}
 
-                                {boxers.quantity!=0?<div className="order_details"><span>Boxers</span><span>{finalData.items.Boxers.methods}</span><span>{finalData.items.Boxers.denomination}=</span><span>{boxersGrandTotal}</span></div>:<></>}
+                                {boxers.quantity!=0?<div className="order_details"><span>Boxers</span><span><i>{finalData.items.Boxers.methods}</i></span><span>{finalData.items.Boxers.denomination}=</span><span>{boxersGrandTotal}</span></div>:<></>}
 
-                                {joggers.quantity!=0?<div className="order_details"><span>Joggers</span><span>{finalData.items.Joggers.methods}</span><span>{finalData.items.Joggers.denomination}=</span><span>{joggersGrandTotal}</span></div>:<></>}
+                                {joggers.quantity!=0?<div className="order_details"><span>Joggers</span><span><i>{finalData.items.Joggers.methods}</i></span><span>{finalData.items.Joggers.denomination}=</span><span>{joggersGrandTotal}</span></div>:<></>}
 
-                                {others.quantity!=0?<div className="order_details"><span>Others</span><span>{finalData.items.Others.methods}</span><span>{finalData.items.Others.denomination}=</span><span>{othersGrandTotal}</span></div>:<></>}
+                                {others.quantity!=0?<div className="order_details"><span>Others</span><span><i>{finalData.items.Others.methods}</i></span><span>{finalData.items.Others.denomination}=</span><span>{othersGrandTotal}</span></div>:<></>}
                             </div>
                             <div className="total_div">
-                                <div className="total_div1"><span>Sub total:</span><span className="sub_total">{finalData.price}</span></div>
-                                <div className="total_div1"><span>Pickup Charges:</span><span className="pickup_div">90</span></div>
-                                <div className="total_div2"><span>Total:</span><span className="sub_total">{finalData.price+90}</span></div>
+                                <div className="total_div1"><span>Sub total:</span><span className="sub_total"><b>{finalData.price}</b></span></div>
+
+                                <div className="total_div1"><span>Pickup Charges:</span><span className="pickup_div"><b>90</b></span></div>
+                                
+                                <div className="total_blue"><span>Total:</span><span className="sub_total">Rs.{finalData.price+90}</span></div>
                             </div>
                             <div className="address_div">
                                 <h5>Address</h5>
-                                <div>
+                                <div className="square_box">
                                     <h3>Home</h3>
                                     <span>{userData.main_Address} {userData.district} {userData.state} {userData.pincode} {userData.phone}</span>
                                 </div>
                             </div>
-                            <button onClick={sendingOrder}>confirm</button>
+                            <button className="confirm_btn" onClick={sendingOrder}>confirm</button>
                             </div>
                         </div>
                     </div>)}
                     {popup &&(<div className="modal">
                         <div className="overlay">
                         <div className="popup-content">
-                            <img src={blueTick}/>
+                            <img className="bluetick" src={blueTick}/>
                             <h1>Your order is successfully.</h1>
                             <p>You can track the delivery in the "Orders" section.</p>
-                            <button  onClick={Handle_go_to_orders}>Go to orders</button>
+                            <button className="order_route_btn"  onClick={Handle_go_to_orders}>Go to orders</button>
                             </div>
                         </div>
                         </div>)}
