@@ -273,7 +273,7 @@ const navigate = useNavigate();
             I agree to Terms & Condition receiving marketing and promotional
             materials
           </label>
-          <button type="submit" className="section2_btn1">
+          <button type="submit" className="section2_btn1" >
             Register
           </button>
         </form>
