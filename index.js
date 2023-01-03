@@ -1,14 +1,11 @@
 const app = require('./src/app');
 const mongoose= require("mongoose");
 const dotenv = require('dotenv');
-const cors= require("cors");
 
-
-app.use(cors());
 
 dotenv.config();
 //connect to DB
-mongoose.connect(process.env.DATABASE_URL,{ useNewUrlParser: true, useUnifiedTopology: true }, () => {
+mongoose.connect("mongodb+srv://sai_charan:saicharan@cluster0.pu747xs.mongodb.net/laundryDB",{ useNewUrlParser: true, useUnifiedTopology: true }, () => {
     console.log('connected to DB')
 })
 
