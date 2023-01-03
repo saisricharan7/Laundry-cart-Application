@@ -6,14 +6,24 @@ const Auth= require("../middleware/auth");
 
 router.use(bodyparser.json());
 
-router.post('/create',Auth, async(req,res)=>{
+router.post('/create', async(req,res)=>{
     try{
-        const {user,order_id,date_time,store_location,city,store_phone,
-        total_items,price,status,items}=req.body
+        // const {user,order_id,date_time,store_location,city,store_phone,
+        // total_items,price,status,items}=req.body
         const newOrder= await Orders({
-            user: user,
-        order_id,date_time,store_location,city,store_phone,
-        total_items,price,status,items
+            user: req.body.user,
+            order_id:req.body.order_id,
+            date_time:req.body.date_time,
+            store_location:req.body.store_location,
+            city:req.body.city,
+            store_phone:req.body.store_phone,
+            total_items:req.body.total_items,
+            price:req.body.price,
+            status:req.body.status,
+            items:req.body.items
+
+        // order_id,date_time,store_location,city,store_phone,
+        // total_items,price,status,items
 
         })
         await newOrder.save()
@@ -34,12 +44,12 @@ router.post('/create',Auth, async(req,res)=>{
 
 
 
-router.post('/get_orders',Auth,async(req,res)=>{
+router.post('/get_orders/:email',Auth,async(req,res)=>{
   
     try{
-        const {email} = res.user
+        const email = req.params.email
       // const decoded =  jwt.verify(token,process.env.JWT_SECRET_KEY)
-       console.log(req.user)
+    //    console.log(req.user)
         const Item=await Orders.find({user:email})
 
      
