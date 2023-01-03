@@ -21,15 +21,20 @@ const History=()=>{
     const [sub_total,setSub_total]=useState(0)
     const [id,setItemid]= useState('');
     const user =JSON.parse(window.localStorage.getItem("userData")) 
-    let data,post;
+    let data;
     const [products,setProducts]= useState()
     let headers = { "Authorization": token };
+    const Cancel_order_btn=()=>{
+        setHistoryModal(false);
+        setCancel(true);
+
+    }
   
     const HandleCancelOrder=async ()=>{
         console.log(id)
        setCancel(false)
        await axios.patch(`/api_order/cancel/${id}`,null,{headers})
-       await axios.post("/api_order/get_orders", null, { headers }).then( (res)=>{data=res.data})
+       await axios.post(`/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
        setHistory(data.post)
        
     }
@@ -39,13 +44,10 @@ const History=()=>{
         // setSub_total(0);
     }
     
-    const Cancel_order_btn=()=>{
-        setHistoryModal(false);
-        setCancel(true);
-
-    }
+   
     const HandleHistorySummary=async (key)=>{
         setHistoryModal(true)
+        setItemid(key);
         let req_item
         for(let i=0;i<history.length;i++){
             const eachItem= history[i]
@@ -67,7 +69,6 @@ const History=()=>{
         const getdata=async ()=>{
         try {
            await axios.post(`/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
-            post = data.post
             setHistory(data.post)
 
           } catch (error) {
