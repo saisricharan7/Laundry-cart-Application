@@ -33,14 +33,7 @@
   .footer2_sec2 {
     margin-top: 10px;
     margin-left: 436px;
-    width: 44px;
-    height: 22px;
-    text-align: center;
-    font: normal normal medium 16px/24px Avenir;
-    letter-spacing: 0.16px;
-    color: #182838;
-    text-transform: capitalize;
-    opacity: 1;
+    font-weight: bold;
   }
   
   /* .footer2_first__ul {

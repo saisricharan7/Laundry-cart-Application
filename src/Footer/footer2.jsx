@@ -37,7 +37,7 @@ const Footer2 = () => {
       </section>
 
       <section className="footer2_sec2">
-        <h4 className="footer2_sec4__title">SOCIAL MEDIA</h4>
+        <p className="footer2_sec4__title">SOCIAL&nbsp;MEDIA</p>
         <div className="footer2_socialmedia">
           <img
             src={facebook}
