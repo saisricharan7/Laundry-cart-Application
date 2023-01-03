@@ -404,8 +404,8 @@ const Home_page=()=>{
                     {/* </ul> */}
                 </thead>
                 <tbody>
-                    <tr className='container-home'>
-                        <td className="tab-col-1"><img className='image' src={Shirt} alt=''></img><span className='span'>Shirt</span><span className='span1'>Lorem Ipsum is simply dummy text of the</span></td>
+                    <tr className='createContainer-home'>
+                        <td className="tab-col-1"><div className="createBlock_div"><img className='image' src={Shirt} alt=''></img><div className="createSpan_div"><span className='createSpan'>Shirt</span><span className='createSpan1'>Lorem Ipsum is simply dummy text of the</span></div></div></td>
                         <td className="tab-col-2"><input  className='inputfield' type={'number'} min={0} value={shirt.quantity} onChange={(e)=>setShirt({...shirt,quantity:e.target.value})} /></td>
 
                         <td className="tab-col-3">{shirt.wash !== null ?<img className='washType' src={washBlue} alt="" onClick={()=>setShirt({...shirt,wash:null})}/>:
@@ -424,8 +424,8 @@ const Home_page=()=>{
                         <span className='price' >{shirt.quantity}x{shirtTotal}=<span className="grandtotal-cro">{shirtGrandTotal}</span></span>
                         <button className='reset' onClick={()=>setShirt({...shirt,quantity:0,wash:null,iron:null,dry:null,bleach:null})}>Reset</button></>}</td> 
                     </tr>
-                    <tr className='container-home'>
-                        <td className="tab-col-1"><img className='image' src={tshirt} alt=''></img><span className='span'>T-shirts</span><span className='span1'>Lorem Ipsum is simply dummy text of the</span></td>
+                    <tr className='createContainer-home'>
+                        <td className="tab-col-1"><div className="createBlock_div"><img className='image' src={tshirt} alt=''></img><div className="createSpan_div"><span className='createSpan'>T-shirts</span><span className='createSpan1'>Lorem Ipsum is simply dummy text of the</span></div></div></td>
                         <td className="tab-col-2"><input className='inputfield' type={'number'} min={0} value={t_shirt.quantity} onChange={(e)=>setT_shirt({...t_shirt,quantity:e.target.value})}/></td>
                         <td className="tab-col-3">{t_shirt.wash !== null ?<img className='washType' src={washBlue} alt="" onClick={()=>setT_shirt({...t_shirt,wash:null})}/>:
                             <img className='washType' src={washWhite} alt="" onClick={()=>setT_shirt({...t_shirt,wash:20})}/>}
@@ -447,8 +447,8 @@ const Home_page=()=>{
                        <button className='reset' onClick={()=>setT_shirt({...t_shirt,quantity:0,wash:null,iron:null,dry:null,bleach:null})}>Reset</button></>}
                         </td>
                     </tr>
-                    <tr className='container-home'>
-                        <td className="tab-col-1"><img className='image' src={Trouser} alt=''></img><span className='span'>Trouser</span><span className='span1'>Lorem Ipsum is simply dummy text of the</span></td>
+                    <tr className='createContainer-home'>
+                        <td className="tab-col-1"><div className="createBlock_div"><img className='image' src={Trouser} alt=''></img><div className="createSpan_div"><span className='createSpan'>Trouser</span><span className='createSpan1'>Lorem Ipsum is simply dummy text of the</span></div></div></td>
                         <td className="tab-col-2"><input className='inputfield' type={'number'} min={0} value={trouser.quantity}   onChange={(e)=>setTrouser({...trouser,quantity:e.target.value})} /></td>
 
                         <td className="tab-col-3">{trouser.wash !== null ?<img className='washType' src={washBlue} alt="" onClick={()=>setTrouser({...trouser,wash:null})}/>:
@@ -470,8 +470,8 @@ const Home_page=()=>{
                         <button className='reset' onClick={()=>setTrouser({...trouser,quantity:0,wash:null,iron:null,dry:null,bleach:null})}>Reset</button></>}
                         </td>
                     </tr>
-                    <tr className='container-home'>
-                        <td className="tab-col-1"><img className='image' src={Jeans} alt=''></img><span className='span'>Jeans....</span><span className='span1'>Lorem Ipsum is simply dummy text of the</span></td>
+                    <tr className='createContainer-home'>
+                        <td className="tab-col-1"><div className="createBlock_div"><img className='image' src={Jeans} alt=''></img><div className="createSpan_div"><span className='createSpan'>Jeans....</span><span className='createSpan1'>Lorem Ipsum is simply dummy text of the</span></div></div></td>
                         <td className="tab-col-2"><input className='inputfield' type={'number'} min={0}  value={jeans.quantity} onChange={(e)=>setJeans({...jeans,quantity:e.target.value})} /></td>
 
                         <td className="tab-col-3">{jeans.wash !== null ?<img className='washType' src={washBlue} alt="" onClick={()=>setJeans({...jeans,wash:null})}/>:
@@ -493,8 +493,8 @@ const Home_page=()=>{
                         <button className='reset' onClick={()=>setJeans({...jeans,quantity:0,wash:null,iron:null,dry:null,bleach:null})}>Reset</button></>}
                         </td>
                     </tr>
-                    <tr className='container-home'>
-                        <td className="tab-col-1"><img className='image' src={Boxers} alt=''></img><span className='span'>Boxers.</span><span className='span1'>Lorem Ipsum is simply dummy text of the</span></td>
+                    <tr className='createContainer-home'>
+                        <td className="tab-col-1"><div className="createBlock_div"><img className='image' src={Boxers} alt=''></img><div className="createSpan_div"><span className='createSpan'>Boxers.</span><span className='createSpan1'>Lorem Ipsum is simply dummy text of the</span></div></div></td>
                         <td className="tab-col-2"><input className='inputfield' type={'number'} min={0} value={boxers.quantity}  onChange={(e)=>setBoxers({...boxers,quantity:e.target.value})} /></td>
 
                         <td className="tab-col-3">{boxers.wash !== null ?<img className='washType' src={washBlue} alt="" onClick={()=>setBoxers({...boxers,wash:null})}/>:
@@ -514,8 +514,8 @@ const Home_page=()=>{
                         <span className='price' >{boxers.quantity}x{boxersTotal}=<span className="grandtotal-cro">{boxersGrandTotal}</span></span>
                         <button className='reset' onClick={()=>setBoxers({...boxers,quantity:0,wash:null,iron:null,dry:null,bleach:null})}>Reset</button></>}</td>
                     </tr>
-                    <tr className='container-home'>
-                        <td className="tab-col-1"><img className='image' src={Joggers} alt=''></img><span className='span'>Joggers</span><span className='span1'>Lorem Ipsum is simply dummy text of the</span></td>
+                    <tr className='createContainer-home'>
+                        <td className="tab-col-1"><div className="createBlock_div"><img className='image' src={Joggers} alt=''></img><div className="createSpan_div"><span className='createSpan'>Joggers</span><span className='createSpan1'>Lorem Ipsum is simply dummy text of the</span></div></div></td>
                         <td className="tab-col-2"><input className='inputfield' type={'number'} min={0} value={joggers.quantity}  onChange={(e)=>setJoggers({...joggers,quantity:e.target.value})}/></td>
 
                         <td className="tab-col-3">{joggers.wash !== null ?<img className='washType' src={washBlue} alt="" onClick={()=>setJoggers({...joggers,wash:null})}/>:
@@ -535,8 +535,8 @@ const Home_page=()=>{
                         <span className='price' >{joggers.quantity}x{joggersTotal}=<span className="grandtotal-cro">{joggersGrandTotal}</span></span>
                         <button className='reset' onClick={()=>setJoggers({...joggers,quantity:0,wash:null,iron:null,dry:null,bleach:null})}>Reset</button></>}</td>
                     </tr>
-                    <tr className='container-home'>
-                    <td className="tab-col-1"><img className='image' src={Others} alt=''></img><span className='span'>Others..</span><span className='span1'>Lorem Ipsum is simply dummy text of the</span></td>
+                    <tr className='createContainer-home'>
+                    <td className="tab-col-1"><div className="createBlock_div"><img className='image' src={Others} alt=''></img><div className="createSpan_div"><span className='createSpan'>Others..</span><span className='createSpan1'>Lorem Ipsum is simply dummy text of the</span></div></div></td>
                     <td className="tab-col-2"><input className='inputfield' type={'number'} min={0} value={others.quantity}  onChange={(e)=>setOthers({...others,quantity:e.target.value})} /></td>
 
                         <td className="tab-col-3">{others.wash !== null ?<img className='washType' src={washBlue} alt="" onClick={()=>setOthers({...others,wash:null})}/>:
