@@ -26,7 +26,7 @@ import blueTick from './images/Blue_tick.PNG'
 
 const Home_page=()=>{
     const current= new Date();
-    const up_date=`${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}`
+   // const up_date=`${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} ${current.getHours()}:${current.getMinutes()}`
     const navigate = useNavigate();
     const [modal, setModal] = useState(false);
     const [popup,setPop]= useState(false);

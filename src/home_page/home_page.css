@@ -197,6 +197,7 @@ tr{
   .home-sidebar{
     display: inline;
     width: 57px;
+    height:85vh;
     background: #5861AE 0% 0% no-repeat padding-box;
     opacity: 1;
     
