@@ -19,14 +19,14 @@ router.post('/register',async (req,res)=>{
         }else{
             const hash = await bcrypt.hash(password,10)
             const newUser = new Users({
-                name:name,
-                email:email,
-                password:hash,
-                phone:phone,
-                state:state,
-                district:district,
-                pincode:pincode,
-                main_Address:main_Address
+                name,
+                email,
+                hash,
+                phone,
+                state,
+                district,
+                pincode,
+                main_Address
             })
             await newUser.save();
             res.status(200).json({
@@ -61,7 +61,7 @@ router.post('/login',async(req,res)=>{
         }
         
         if(result){
-            const token = jwt.sign({id:user._id},'secure_jwt_secret_key',{expiresIn:"2h"});
+            const token = jwt.sign({id:user._id},"secure_jwt_secret_key",{expiresIn:"2h"});
             res.status(200).json({
                 status:"success",
                 token,
