@@ -17,11 +17,11 @@ router.post('/register',async (req,res)=>{
                 message:"Account already exists"
             })
         }else{
-            const hash = await bcrypt.hash(password,10)
+            const hash_password = await bcrypt.hash(password,10)
             const newUser = new Users({
                 name,
                 email,
-                hash,
+                hash_password,
                 phone,
                 state,
                 district,
