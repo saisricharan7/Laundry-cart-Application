@@ -18,7 +18,7 @@ router.post('/register',async (req,res)=>{
             })
         }else{
             const hash = await bcrypt.hash(password,10)
-            const newUser = await Users.create({
+            const newUser = new Users({
                 name:name,
                 email:email,
                 password:hash,
@@ -28,7 +28,8 @@ router.post('/register',async (req,res)=>{
                 pincode:pincode,
                 main_Address:main_Address
             })
-            res.json({
+            await newUser.save();
+            res.status(200).json({
                 status:"success",
                 newuser:newUser
             })
