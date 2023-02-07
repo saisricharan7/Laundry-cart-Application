@@ -51,7 +51,7 @@ router.post('/login',async(req,res)=>{
         let user;
         if (userbyMail.length || userbyPhone.length){
              user = userbyMail.length ? userbyMail[0]: userbyPhone[0]
-            var result = await bcrypt.compare(password,user.password)
+            var result =  bcrypt.compare(password,user.hash_password)
         }
         else{
             res.status(404).json({
