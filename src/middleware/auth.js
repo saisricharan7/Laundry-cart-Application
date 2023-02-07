@@ -15,7 +15,7 @@ const JWT_AUTH = async (req, res, next) => {
         //     token = token.split(" ")[1]
         // }
 
-        const verifyUser = jwt.verify(token, process.env.JWT_SECRET_KEY)
+        const verifyUser = jwt.verify(token,"secure_jwt_secret_key")
 
         if (verifyUser) {
             res.user = verifyUser

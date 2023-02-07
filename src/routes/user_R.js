@@ -61,7 +61,7 @@ router.post('/login',async(req,res)=>{
         }
         
         if(result){
-            const token = jwt.sign({id:user._id},process.env.JWT_SECRET_KEY,{expiresIn:"2h"});
+            const token = jwt.sign({id:user._id},'secure_jwt_secret_key',{expiresIn:"2h"});
             res.status(200).json({
                 status:"success",
                 token,
