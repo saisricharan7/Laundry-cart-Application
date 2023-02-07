@@ -5,6 +5,7 @@ import Footer1 from "../Footer/footer1";
 import SigninHeader from "../Header/sign_in_header";
 import Footer2 from "../Footer/footer2";
 import Footer3 from "../Footer/footer3";
+import axios from 'axios';
 const RegisterPage = () => {
 const navigate = useNavigate();
   const [nameErrorMsg, setNameErrorMsg] = useState("");
@@ -17,14 +18,14 @@ const navigate = useNavigate();
   const [pinErrorMsg, setPinErrorMsg] = useState("");
   const [modal, setModal] = useState(false);
   const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    phoneNumber: "",
-    state: "",
-    district: "",
-    address: "",
-    pincode: "",
-    password: "",
+      Name :'',
+      Email:'',
+      PhoneNumber:'',
+      State:'',
+      District:'',
+      Address:'',
+      pincode:'',
+      Password:'',
   });
 
   const toggleModal = () => {
@@ -127,48 +128,71 @@ const navigate = useNavigate();
 //! Handle register 
   const submitHandler =async (e) => {
     e.preventDefault();
-    const {
-      Name,
-      Email,
-      PhoneNumber,
-      State,
-      District,
-      Address,
-      pincode,
-      Password,
-    } = userData;
+    // const {
+    //   Name,
+    //   Email,
+    //   PhoneNumber,
+    //   State,
+    //   District,
+    //   Address,
+    //   pincode,
+    //   Password,
+    // } = userData;
     console.log(userData)
-    await fetch(`https://laundry-be-pwp5.onrender.com/register`, {
-      method: "POST",
-      body: JSON.stringify({
-        name:Name,
-        email:Email,
-        password:Password,
-        phone:PhoneNumber,
-        state:State,
-        district:District,
-        pincode:pincode,
-        main_Address:Address
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
+    await axios.post("https://laundry-be-pwp5.onrender.com/register",{
+          name:userData.Name,
+          email:userData.Email,
+          password:userData.Password,
+          phone:userData.PhoneNumber,
+          state:userData.State,
+          district:userData.District,
+          pincode:userData.pincode,
+          main_Address:userData.Address
+        }).then((data) => {
+      console.log(data);
+      if (data.message === "Account already exists") {
+        setModal(!modal);
+        alert("User Already Exists.Please, Login !!!");
+        navigate("/login", { replace: true });
+      } else {
+        alert("Registration Successful");
+        navigate("/login", { replace: true });
+      }
     })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        if (data.message === "Account already exists") {
-          setModal(!modal);
-          alert("User Already Exists.Please, Login !!!");
-          navigate("/login", { replace: true });
-        } else {
-          alert("Registration Successful");
-          navigate("/login", { replace: true });
-        }
-      })
-      .catch((e) => {
-        alert(e.message);
-      });
+    .catch((e) => {
+      alert(e.message);
+    });
+    // await fetch(`https://laundry-be-pwp5.onrender.com/register`, {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     name:Name,
+    //     email:Email,
+    //     password:Password,
+    //     phone:PhoneNumber,
+    //     state:State,
+    //     district:District,
+    //     pincode:pincode,
+    //     main_Address:Address
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data);
+    //     if (data.message === "Account already exists") {
+    //       setModal(!modal);
+    //       alert("User Already Exists.Please, Login !!!");
+    //       navigate("/login", { replace: true });
+    //     } else {
+    //       alert("Registration Successful");
+    //       navigate("/login", { replace: true });
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     alert(e.message);
+    //   });
    };
 
   return (

@@ -22,7 +22,8 @@ import Others from './images/others.jpg'
 import Homeheader from "../Header/home_header";
 import "./home_page.css";
 import moment from "moment";
-import blueTick from './images/Blue_tick.PNG'
+import blueTick from './images/Blue_tick.PNG';
+import axios from "axios";
 
 const Home_page=()=>{
     const current= new Date();
@@ -31,7 +32,7 @@ const Home_page=()=>{
     const [modal, setModal] = useState(false);
     const [popup,setPop]= useState(false);
     const token = localStorage.getItem("token");
-    const userData = JSON.parse(localStorage.getItem("userData"));
+    const userData = (localStorage.getItem("userData"));
     const [shirt, setShirt] = useState({
         quantity:0,
         wash:null,
@@ -297,9 +298,8 @@ const Home_page=()=>{
 
     function sendingOrder(){
         setPop(true);setModal(false);
-    fetch(`https://laundry-be-pwp5.onrender.com/api_order/create`, {
-        method: "POST",
-        body: JSON.stringify({
+        axios.post('https://laundry-be-pwp5.onrender.com/api_order/create',
+            {
             user:finalData.user,
             order_id:finalData.order_id,
             date_time:finalData.date_time,
@@ -353,18 +353,76 @@ const Home_page=()=>{
                     item_price:finalData.items.Others.item_price
                 },
             }
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        })
-        .catch((e) => {
-          alert(e.message);
-        });
+        }).then(data=>console.log(data)).catch(e=>alert(e.message))
+
+    // fetch(`https://laundry-be-pwp5.onrender.com/api_order/create`, {
+    //     method: "POST",
+    //     body: JSON.stringify({
+    //         user:finalData.user,
+    //         order_id:finalData.order_id,
+    //         date_time:finalData.date_time,
+    //         store_location:finalData.store_location,
+    //         city:finalData.city,
+    //         store_phone:finalData.store_phone,
+    //         total_items:finalData.total_items,
+    //         price:finalData.price,
+    //         status:finalData.status,
+    //         items:{
+    //             shirts:{
+    //                 qty:finalData.items.shirts.qty,
+    //                 methods:finalData.items.shirts.methods,
+    //                 denomination:finalData.items.shirts.denomination,
+    //                 item_price:finalData.items.shirts.item_price
+    //             },
+    //             Tshirts:{
+    //                 qty:finalData.items.Tshirts.qty,
+    //                 methods:finalData.items.Tshirts.methods,
+    //                 denomination:finalData.items.Tshirts.denomination,
+    //                 item_price:finalData.items.Tshirts.item_price
+    //             },
+    //             Trousers:{
+    //                 qty:finalData.items.Trousers.qty,
+    //                 methods:finalData.items.Trousers.methods,
+    //                 denomination:finalData.items.Trousers.denomination,
+    //                 item_price:finalData.items.Trousers.item_price
+    //             },
+    //             Jeans:{
+    //                 qty:finalData.items.Jeans.qty,
+    //                 methods:finalData.items.Jeans.methods,
+    //                 denomination:finalData.items.Jeans.denomination,
+    //                 item_price:finalData.items.Jeans.item_price
+    //             },
+    //             Boxers:{
+    //                 qty:finalData.items.Boxers.qty,
+    //                 methods:finalData.items.Boxers.methods,
+    //                 denomination:finalData.items.Boxers.denomination,
+    //                 item_price:finalData.items.Boxers.item_price
+    //             },
+    //             Joggers:{
+    //                 qty:finalData.items.Joggers.qty,
+    //                 methods:finalData.items.Joggers.methods,
+    //                 denomination:finalData.items.Joggers.denomination,
+    //                 item_price:finalData.items.Joggers.item_price
+    //             },
+    //             Others:{
+    //                 qty:finalData.items.Others.qty,
+    //                 methods:finalData.items.Others.methods,
+    //                 denomination:finalData.items.Others.denomination,
+    //                 item_price:finalData.items.Others.item_price
+    //             },
+    //         }
+    //     }),
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //     })
+    //     .catch((e) => {
+    //       alert(e.message);
+    //     });
     }
     function Handle_go_to_orders(){
         setPop(false);

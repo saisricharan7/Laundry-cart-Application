@@ -50,17 +50,17 @@ const SigninPage = () => {
   const submitHandler =async (e) => {
     e.preventDefault();
     // const { email, password } = data;
-    await axios.post("https://laundry-be-pwp5.onrender.com/login",data).then(data=>{
+    await axios.post("https://laundry-be-pwp5.onrender.com/login",data).then(data=>{console.log(data)
       if (data.status === "Failed") {
               setMessage(data.message);
             } else {
-              const token = data.token;
-              const user=JSON.stringify( data.user);
+              const token = data.data.token;
+              const user=JSON.stringify( data.data.user);
               localStorage.setItem('token',token)
-              localStorage.setItem('userData',user)
+              localStorage.setItem('userData',(user))
               navigate("/home");
             }
-    }).catch(e=>{setMessage("Server down. try after sometime !!")})
+    }).catch(e=>{setMessage(e.message)})
       
     // await fetch(`https://laundry-cart-be.onrender.com/login`, {
     //   method: "POST",

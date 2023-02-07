@@ -21,6 +21,7 @@ const History=()=>{
     const [sub_total,setSub_total]=useState(0)
     const [id,setItemid]= useState('');
     const user =JSON.parse(window.localStorage.getItem("userData")) 
+    console.log(user)
     let data;
     const [products,setProducts]= useState()
     let headers = { "Authorization": token };
@@ -68,6 +69,7 @@ const History=()=>{
             }
         const getdata=async ()=>{
         try {
+            
            await axios.post(`https://laundry-be-pwp5.onrender.com/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
             setHistory(data.post)
 
