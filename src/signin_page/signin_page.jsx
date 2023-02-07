@@ -5,6 +5,7 @@ import Footer1 from "../Footer/footer1";
 import SigninHeader from "../Header/sign_in_header";
 import Footer2 from "../Footer/footer2";
 import Footer3 from "../Footer/footer3";
+import axios from "axios";
 
 
 const SigninPage = () => {
@@ -48,34 +49,46 @@ const SigninPage = () => {
 // handle signin and routing to home page
   const submitHandler =async (e) => {
     e.preventDefault();
-    const { email, password } = data;
-    await fetch(`/login`, {
-      method: "POST",
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data.user);
-        if (data.status === "Failed") {
-          setMessage(data.message);
-        } else {
-          const token = data.token;
-          const user=JSON.stringify( data.user);
-          localStorage.setItem('token',token)
-          localStorage.setItem('userData',user)
-          navigate("/home");
-        }
-      })
-      .catch((e) => {
-        console.log(e);
-        setMessage("Server down. try after sometime !!");
-      });
+    // const { email, password } = data;
+    await axios.post("https://laundry-cart-be.onrender.com/login",data).then(data=>{
+      if (data.status === "Failed") {
+              setMessage(data.message);
+            } else {
+              const token = data.token;
+              const user=JSON.stringify( data.user);
+              localStorage.setItem('token',token)
+              localStorage.setItem('userData',user)
+              navigate("/home");
+            }
+    }).catch(e=>{setMessage("Server down. try after sometime !!")})
+      
+    // await fetch(`https://laundry-cart-be.onrender.com/login`, {
+    //   method: "POST",
+    //   body: JSON.stringify({
+    //     email: email,
+    //     password: password,
+    //   }),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log(data.user);
+    //     if (data.status === "Failed") {
+    //       setMessage(data.message);
+    //     } else {
+    //       const token = data.token;
+    //       const user=JSON.stringify( data.user);
+    //       localStorage.setItem('token',token)
+    //       localStorage.setItem('userData',user)
+    //       navigate("/home");
+    //     }
+    //   })
+    //   .catch((e) => {
+    //     console.log(e);
+    //     setMessage("Server down. try after sometime !!");
+    //   });
   };
   return (
     <>

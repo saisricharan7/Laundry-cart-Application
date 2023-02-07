@@ -297,7 +297,7 @@ const Home_page=()=>{
 
     function sendingOrder(){
         setPop(true);setModal(false);
-    fetch(`/api_order/create`, {
+    fetch(`https://laundry-cart-be.onrender.com/api_order/create`, {
         method: "POST",
         body: JSON.stringify({
             user:finalData.user,

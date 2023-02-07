@@ -33,8 +33,8 @@ const History=()=>{
     const HandleCancelOrder=async ()=>{
         console.log(id)
        setCancel(false)
-       await axios.patch(`/api_order/cancel/${id}`,null,{headers})
-       await axios.post(`/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
+       await axios.patch(`https://laundry-cart-be.onrender.com/api_order/cancel/${id}`,null,{headers})
+       await axios.post(`https://laundry-cart-be.onrender.com/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
        setHistory(data.post)
        
     }
@@ -68,7 +68,7 @@ const History=()=>{
             }
         const getdata=async ()=>{
         try {
-           await axios.post(`/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
+           await axios.post(`https://laundry-cart-be.onrender.com/api_order/get_orders/${user.email}`, null, { headers }).then( (res)=>{data=res.data})
             setHistory(data.post)
 
           } catch (error) {
