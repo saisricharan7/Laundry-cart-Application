@@ -138,7 +138,7 @@ const navigate = useNavigate();
       Password,
     } = userData;
     console.log(userData)
-    await fetch(`https://laundry-cart-be.onrender.com/register`, {
+    await fetch(`https://laundry-be-pwp5.onrender.com/register`, {
       method: "POST",
       body: JSON.stringify({
         name:Name,

@@ -50,7 +50,7 @@ const SigninPage = () => {
   const submitHandler =async (e) => {
     e.preventDefault();
     // const { email, password } = data;
-    await axios.post("https://laundry-cart-be.onrender.com/login",data).then(data=>{
+    await axios.post("https://laundry-be-pwp5.onrender.com/login",data).then(data=>{
       if (data.status === "Failed") {
               setMessage(data.message);
             } else {
