@@ -32,7 +32,8 @@ const Home_page=()=>{
     const [modal, setModal] = useState(false);
     const [popup,setPop]= useState(false);
     const token = localStorage.getItem("token");
-    const userData = (localStorage.getItem("userData"));
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    console.log(userData)
     const [shirt, setShirt] = useState({
         quantity:0,
         wash:null,
